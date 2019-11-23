@@ -1,0 +1,45 @@
+-- Osterman, David / CS2300
+
+DROP TABLE IF EXISTS Recipe CASCADE;
+DROP TABLE IF EXISTS Ingredient CASCADE;
+DROP TABLE IF EXISTS Instruction CASCADE;
+DROP TABLE IF EXISTS Selection CASCADE;
+DROP TABLE IF EXISTS Review CASCADE;
+
+CREATE TABLE Recipe (
+  Name VARCHAR(100) PRIMARY KEY,
+  Course VARCHAR(25),
+  Instrument VARCHAR(25),
+  Prep_time INTEGER UNSIGNED,
+  Cook_time INTEGER UNSIGNED,
+  Score TINYINT UNSIGNED
+);
+
+CREATE TABLE Ingredient (
+  Rname VARCHAR(100) REFERENCES Recipe(Name),
+  Iname VARCHAR(25),
+  Amount DOUBLE UNSIGNED,
+  PRIMARY KEY(Rname, Iname)
+);
+
+CREATE TABLE Instruction (
+  Rname VARCHAR(100) REFERENCES Recipe(Name),
+  Step_num TINYINT UNSIGNED,
+  Step_instruction VARCHAR(500),
+  PRIMARY KEY(Rname, Step_num)
+);
+
+CREATE TABLE Selection (
+  Rname VARCHAR(100) REFERENCES Recipe(Name),
+  Iname VARCHAR(25),
+  Amount DOUBLE UNSIGNED,
+  PRIMARY KEY(Rname, Iname)
+);
+
+CREATE TABLE Review (
+  Rname VARCHAR(100) REFERENCES Recipe(Name),
+  Reviewer VARCHAR(25),
+  Taste TINYINT UNSIGNED,
+  Cost TINYINT UNSIGNED,
+  PRIMARY KEY(Rname, Reviewer)
+);

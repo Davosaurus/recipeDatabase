@@ -1,0 +1,75 @@
+html {
+  background: #2E2E35;
+  color: #DDDDDD;
+  font-family: verdana, helvetica, sans-serif;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+td {
+  vertical-align: top;
+}
+.header {
+  color: #FFA500;
+}
+.container .box { 
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+.container .box .box-row { 
+  display: table-row;
+  height: 100%;
+}
+.container .box .box-cell { 
+  display: table-cell;
+  padding: 10px;
+}
+.container .box .box-cell.edges {
+  width: 15%;
+  background: #528052;
+  color: #000000;
+  vertical-align: top;
+}
+.container .box .box-cell.center { 
+  width: 70%;
+  max-width: 70%;
+}
+.menubutton, .menusearch {
+  display: block;
+  height: 50px;
+  border: 2px solid #000000;
+  background-color: #FFA500; /*#828081;*/
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  padding: 5px;
+  transition-duration: 0.3s;
+}
+.menubutton:hover {
+  display: block;
+  height: 54px;
+  background-color: #FFB550; /*#C2C0C1;*/
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  padding: 5px;
+}
+.inlinebutton {
+  background:none;
+  color:inherit;
+  font:inherit;
+  text-align:left;
+  border:none;
+  cursor:pointer;
+  padding:0;
+  word-break:break-word;
+  white-space:normal;
+  max-width: 400px;
+}
+.icon {
+  display: inline-block;
+  width: 25px;
+  text-align: center;
+}
