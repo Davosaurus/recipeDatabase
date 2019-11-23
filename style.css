@@ -31,10 +31,12 @@ td {
   background: #528052;
   color: #000000;
   vertical-align: top;
+  padding-bottom: 80px;
 }
 .container .box .box-cell.center { 
   width: 70%;
   max-width: 70%;
+  padding-bottom: 80px;
 }
 .menubutton, .menusearch {
   display: block;

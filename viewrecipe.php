@@ -38,7 +38,7 @@ if(isset($_POST['Review']))
   }
 }
 
-$query = "SELECT Rname, Iname, Amount
+$query = "SELECT Rname, Iname, Amount, Unit
           FROM Ingredient
           WHERE Rname = \"".$dbc->escape_string($_POST['Name'])."\";";
 
@@ -50,6 +50,7 @@ if($ingredients)
   {
     $ingredient_list[] = $row['Iname'];
     $amount_list[] = $row['Amount'];
+    $unit_list[] = $row['Unit'];
   }
 }
 
@@ -57,10 +58,10 @@ if(isset($_POST['Select']))
 {
   for($i = 0; $i < sizeof($ingredient_list); $i++)
   {
-    $query = "INSERT INTO Selection (Rname, Iname, Amount) VALUES (?, ?, ?)";
+    $query = "INSERT INTO Selection (Rname, Iname, Amount, Unit) VALUES (?, ?, ?, ?)";
     
     $stmt = mysqli_prepare($dbc, $query);
-    mysqli_stmt_bind_param($stmt, "ssd", $_POST['Name'], $ingredient_list[$i], $amount_list[$i]);
+    mysqli_stmt_bind_param($stmt, "ssds", $_POST['Name'], $ingredient_list[$i], $amount_list[$i], $unit_list[$i]);
     mysqli_stmt_execute($stmt);
     
     $affected_rows = mysqli_stmt_affected_rows($stmt);
@@ -132,12 +133,14 @@ if($ingredients)
   echo '<table align="left"
   cellspacing="5" cellpadding="8">
 
-  <tr><td><b>Ingredient</b></td>
-  <td><b>Amount</b></td></tr>';
+  <tr><td style="padding: 12 12 0 0"><b>Ingredient</b></td>
+  <td style="padding: 12 2 0 0"><b>Amount</b></td></tr>';
 
   for($i = 0; $i < sizeof($ingredient_list); $i++)
   {
-    echo '<tr><td>'.$ingredient_list[$i].'</td><td>'.$amount_list[$i].'</td>';
+    echo '<tr><td style="padding: 2 12 0 0">'.$ingredient_list[$i].'</td>
+    <td style="padding: 2 2 0 0; text-align: right">'.$amount_list[$i].'</td>
+    <td style="padding: 2 12 0 0">'.$unit_list[$i].'</td>';
     echo '</tr>';
   }
   echo '</table>';

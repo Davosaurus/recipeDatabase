@@ -70,20 +70,19 @@ else
   echo mysqli_error($dbc);
 }
 
-$query = "SELECT Rname, Iname, Amount
-          FROM Selection;";
+$query = "SELECT Rname, Iname, Amount, Unit
+          FROM Selection
+          ORDER BY Iname;";
 $info = @mysqli_query($dbc, $query);
 
 // If the query executed properly proceed
 if($info)
 {
-  
+  /*
   echo '<td id="printMe"><table align="left"
   cellspacing="5" cellpadding="8">
-
   <tr><td><b>Ingredient</b></td>
   <td><b>Amount</b></td></tr>';
-
   $ingredient_list = [];
   while($row = mysqli_fetch_array($info))
   {
@@ -92,13 +91,41 @@ if($info)
     else
       $ingredient_list[$row['Iname']] = $row['Amount'];
   }
-  
   foreach($ingredient_list as $Iname => $Amount)
   {
     echo '<tr><td>'.$Iname.'</td><td>'.$Amount.'</td>';
     echo '</tr>';
   }
   echo '</table></td></tr></table>';
+  */
+  
+  
+  echo '<td id="printMe"><table align="left"
+  cellspacing="5" cellpadding="8">
+  <tr><td style="padding: 12 12 0 0"><b>Ingredient</b></td>
+  <td style="padding: 12 2 0 0"><b>Amount</b></td></tr>';
+  $ingredient_list = [];
+  while($row = mysqli_fetch_array($info))
+  {
+    $ingredient_list[] = $row['Iname'];
+    $amount_list[] = $row['Amount'];
+    $unit_list[] = $row['Unit'];
+  }
+  
+  for($i = 0; $i < sizeof($ingredient_list); $i++)
+  {
+    echo '<tr><td style="padding: 2 12 0 0">'.$ingredient_list[$i].'</td>
+    <td style="padding: 2 2 0 0; text-align: right">'.$amount_list[$i].'</td>
+    <td style="padding: 2 12 0 0">'.$unit_list[$i].'</td></tr>';
+  }
+  echo '</table></td></tr></table>';
+  
+  
+  
+  
+  
+  
+  
   
   if($isEmpty)
     echo '<tr><td>No recipes selected!</td></tr>';

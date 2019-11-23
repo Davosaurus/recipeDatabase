@@ -55,8 +55,11 @@ if(isset($_POST['submit']))
       {
         if(empty($_POST['Amount_'.$i]))
           $data_missing[] = 'Ingredient Amounts';
+        if(empty($_POST['Unit_'.$i]))
+          $data_missing[] = 'Ingredient Units';
         $ingredient_list[] = str_replace("\"", "''", trim($_POST['Ingredient_'.$i]));
         $amount_list[] = trim($_POST['Amount_'.$i]);
+        $unit_list[] = trim($_POST['Unit_'.$i]);
         $i++;
       }
       else
@@ -110,11 +113,11 @@ if(isset($_POST['submit']))
       //loop to add ingredients to database
       for($i = 0; $i < sizeof($ingredient_list); $i++)
       {
-        $query = "INSERT INTO Ingredient (Rname, Iname, Amount) VALUES (?, ?, ?)";
+        $query = "INSERT INTO Ingredient (Rname, Iname, Amount, Unit) VALUES (?, ?, ?, ?)";
         
         $stmt = mysqli_prepare($dbc, $query);
         
-        mysqli_stmt_bind_param($stmt, "ssd", $Name, $ingredient_list[$i], $amount_list[$i]);
+        mysqli_stmt_bind_param($stmt, "ssds", $Name, $ingredient_list[$i], $amount_list[$i], $unit_list[$i]);
         mysqli_stmt_execute($stmt);
         $affected_rows = mysqli_stmt_affected_rows($stmt);
         
