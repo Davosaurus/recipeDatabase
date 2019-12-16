@@ -402,7 +402,6 @@ INSERT INTO `ingredient` (`Rname`, `Iname`, `Amount`, `Unit`) VALUES
 ('Pulled Pork (Instant Pot)', 'Apple Cider Vinegar', 0.5, 'Cups'),
 ('Pulled Pork (Instant Pot)', 'Barbecue Sauce', 1, 'Cups'),
 ('Pulled Pork (Instant Pot)', 'Brown Sugar', 3, 'Tablespoons'),
-('Pulled Pork (Instant Pot)', 'Cole Slaw sucks anus', 3, 'Cans'),
 ('Pulled Pork (Instant Pot)', 'Ground Cumin', 0.5, 'Teaspoons'),
 ('Pulled Pork (Instant Pot)', 'Mustard Powder', 1, 'Teaspoons'),
 ('Pulled Pork (Instant Pot)', 'Paprika', 2, 'Teaspoons'),
