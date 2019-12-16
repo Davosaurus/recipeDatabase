@@ -4,7 +4,7 @@
 <li>You will need to install XAMPP to manage the SQL and web servers (only Apache and mySQL are required)</li>
 <li>Navigate to the source directory of XAMPP (C:\xampp\htdocs by default in windows)</li>
 <li>Clone the repository in that directory</li>
-<li><i>Optional: <a href="https://www.google.com/search?ei=7prZXeGrD8TYtAWLya64DQ&q=how+to+set+up+a+static+ip&oq=how+to+set+up+a+static+ip&gs_l=psy-ab.3..0i10l7.693540.697665..697922...0.1..0.153.3272.0j25......0....1..gws-wiz.......0i71j0i67j0i273j0j0i131.V9TiHXnsnkY&ved=0ahUKEwjh2reimoHmAhVELK0KHYukC9cQ4dUDCAo&uact=5">Set up a static IP</a> so it's easier for computers on your home network to connect. (Note: this is unnecessary if you are only acessing the DB through the host PC)</i></li>
+<li><i>Optional: <a href="https://www.google.com/search?ei=7prZXeGrD8TYtAWLya64DQ&q=how+to+set+up+a+static+ip&oq=how+to+set+up+a+static+ip&gs_l=psy-ab.3..0i10l7.693540.697665..697922...0.1..0.153.3272.0j25......0....1..gws-wiz.......0i71j0i67j0i273j0j0i131.V9TiHXnsnkY&ved=0ahUKEwjh2reimoHmAhVELK0KHYukC9cQ4dUDCAo&uact=5">Set up a static IP</a> so it's easier for computers on your home network to connect. (Note: this is unnecessary if you are only accessing the DB through the host PC)</i></li>
 </ul>
 <h3>Running the Database</h3>
 <ul>
