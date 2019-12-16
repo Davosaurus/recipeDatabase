@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2019 at 11:20 PM
+-- Generation Time: Dec 16, 2019 at 01:58 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -28,12 +28,17 @@ SET time_zone = "+00:00";
 -- Table structure for table `ingredient`
 --
 
-CREATE TABLE `ingredient` (
+CREATE TABLE IF NOT EXISTS `ingredient` (
   `Rname` varchar(100) NOT NULL,
   `Iname` varchar(25) NOT NULL,
   `Amount` double UNSIGNED DEFAULT NULL,
-  `Unit` varchar(25) NOT NULL DEFAULT 'Ounces'
+  `Unit` varchar(25) NOT NULL DEFAULT 'Ounces',
+  PRIMARY KEY (`Rname`,`Iname`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- RELATIONSHIPS FOR TABLE `ingredient`:
+--
 
 --
 -- Dumping data for table `ingredient`
@@ -184,6 +189,19 @@ INSERT INTO `ingredient` (`Rname`, `Iname`, `Amount`, `Unit`) VALUES
 ('Chicken Teriyaki', 'Sesame oil', 1, 'Teaspoons'),
 ('Chicken Teriyaki', 'Soy Sauce', 0.333, 'Cups'),
 ('Chicken Teriyaki', 'Vegetable Oil', 1, 'Tablespoons'),
+('Chicken/Turkey Pot Pie Casserole', 'Baking powder', 2, 'Teaspoons'),
+('Chicken/Turkey Pot Pie Casserole', 'Beans (Green)', 1, 'Cups'),
+('Chicken/Turkey Pot Pie Casserole', 'Broth (Chicken)', 3, 'Cups'),
+('Chicken/Turkey Pot Pie Casserole', 'Butter', 0.5, 'Cups'),
+('Chicken/Turkey Pot Pie Casserole', 'Carrot', 2, 'Cups'),
+('Chicken/Turkey Pot Pie Casserole', 'Chicken', 1.5, 'Pounds'),
+('Chicken/Turkey Pot Pie Casserole', 'Dill (dried)', 0.5, 'Tablespoons'),
+('Chicken/Turkey Pot Pie Casserole', 'Flour', 2.333, 'Cups'),
+('Chicken/Turkey Pot Pie Casserole', 'Milk', 0.75, 'Cups'),
+('Chicken/Turkey Pot Pie Casserole', 'Onion', 0.75, 'Cups'),
+('Chicken/Turkey Pot Pie Casserole', 'Peas', 1, 'Cups'),
+('Chicken/Turkey Pot Pie Casserole', 'Salt', 0.5, 'Teaspoons'),
+('Chicken/Turkey Pot Pie Casserole', 'Water', 0.5, 'Cups'),
 ('Chili 2, Pepper Boogaloo (Instant Pot)', 'Beans (Kidney)', 30, 'Ounces'),
 ('Chili 2, Pepper Boogaloo (Instant Pot)', 'Beef (ground)', 1.5, 'Pounds'),
 ('Chili 2, Pepper Boogaloo (Instant Pot)', 'Broth (beef)', 0.75, 'Cups'),
@@ -243,6 +261,17 @@ INSERT INTO `ingredient` (`Rname`, `Iname`, `Amount`, `Unit`) VALUES
 ('Crockpot BBQ Chicken', 'Chicken', 2, 'Pounds'),
 ('Crockpot BBQ Chicken', 'Italian dressing', 0.25, 'Cups'),
 ('Crockpot BBQ Chicken', 'Worcestershire sauce', 1, 'Tablespoons'),
+('Croquettes', 'Beef (Ground)', 1, 'Pounds'),
+('Croquettes', 'Carrot', 0.5, 'Units/Packages'),
+('Croquettes', 'Egg (Large)', 4, 'Units/Packages'),
+('Croquettes', 'Flour', 0.5, 'Cups'),
+('Croquettes', 'Oil (for frying)', 1, 'Units/Packages'),
+('Croquettes', 'Oil (Vegetable/Canola)', 2, 'Tablespoons'),
+('Croquettes', 'Onion (Medium)', 1, 'Units/Packages'),
+('Croquettes', 'Panko Breadcrumbs', 2, 'Cups'),
+('Croquettes', 'Potatoes (Russet)', 2, 'Pounds'),
+('Croquettes', 'Salt', 1, 'Teaspoons'),
+('Croquettes', 'White Pepper Powder', 0.25, 'Teaspoons'),
 ('Curry (Instant Pot)', 'Beef (Stew Meat)', 1.5, 'Pounds'),
 ('Curry (Instant Pot)', 'Broth (Beef)', 3, 'Cups'),
 ('Curry (Instant Pot)', 'Carrot', 1.5, 'Units/Packages'),
@@ -314,6 +343,13 @@ INSERT INTO `ingredient` (`Rname`, `Iname`, `Amount`, `Unit`) VALUES
 ('Kyle\'s Chocolate Chip Brownie Cake', 'Milk', 4, 'Ounces'),
 ('Kyle\'s Chocolate Chip Brownie Cake', 'Sugar', 8, 'Ounces'),
 ('Kyle\'s Chocolate Chip Brownie Cake', 'Vanilla', 0.167, 'Ounces'),
+('Layered Ground Beef Casserole', 'Celery', 1, 'Cups'),
+('Layered Ground Beef Casserole', 'Cream of celery soup', 1, 'Cans'),
+('Layered Ground Beef Casserole', 'Green pepper', 1, 'Units/Packages'),
+('Layered Ground Beef Casserole', 'Ground beef', 1.5, 'Pounds'),
+('Layered Ground Beef Casserole', 'Onion', 1, 'Units/Packages'),
+('Layered Ground Beef Casserole', 'Potato', 2, 'Units/Packages'),
+('Layered Ground Beef Casserole', 'Tomato sauce', 8, 'Ounces'),
 ('Mac and Cheese (Instant Pot)', 'Butter', 2, 'Tablespoons'),
 ('Mac and Cheese (Instant Pot)', 'Cheese (cheddar)', 2, 'Cups'),
 ('Mac and Cheese (Instant Pot)', 'Cheese (mozzarella)', 1, 'Cups'),
@@ -355,13 +391,13 @@ INSERT INTO `ingredient` (`Rname`, `Iname`, `Amount`, `Unit`) VALUES
 ('Meatloaf (Tasty)', 'Oatmeal', 1, 'Cups'),
 ('Meatloaf (Tasty)', 'Onion (TM)', 1, 'Units/Packages'),
 ('Peanut Chicken Stir-Fry', 'Broccoli', 3, 'Cups'),
-('Peanut Chicken Stir-Fry', 'Brown sugar', 1, 'Tablespoons'),
+('Peanut Chicken Stir-Fry', 'Brown sugar', 2, 'Tablespoons'),
 ('Peanut Chicken Stir-Fry', 'Chicken', 1, 'Pounds'),
-('Peanut Chicken Stir-Fry', 'Corn starch', 1, 'Tablespoons'),
-('Peanut Chicken Stir-Fry', 'Garlic (minced)', 3, 'Teaspoons'),
+('Peanut Chicken Stir-Fry', 'Corn starch', 2, 'Tablespoons'),
+('Peanut Chicken Stir-Fry', 'Garlic (minced)', 6, 'Teaspoons'),
 ('Peanut Chicken Stir-Fry', 'Pasta (or rice)', 4, 'Units/Packages'),
-('Peanut Chicken Stir-Fry', 'Peanut butter', 0.25, 'Cups'),
-('Peanut Chicken Stir-Fry', 'Soy sauce', 3, 'Tablespoons'),
+('Peanut Chicken Stir-Fry', 'Peanut butter', 0.5, 'Cups'),
+('Peanut Chicken Stir-Fry', 'Soy sauce', 6, 'Tablespoons'),
 ('Peanut Chicken Stir-Fry', 'Vegetable oil', 2, 'Tablespoons'),
 ('Pulled Pork (Instant Pot)', 'Apple Cider Vinegar', 0.5, 'Cups'),
 ('Pulled Pork (Instant Pot)', 'Barbecue Sauce', 1, 'Cups'),
@@ -375,6 +411,10 @@ INSERT INTO `ingredient` (`Rname`, `Iname`, `Amount`, `Unit`) VALUES
 ('Pulled Pork (Instant Pot)', 'Salt', 2, 'Teaspoons'),
 ('Pulled Pork (Instant Pot)', 'Tomato Paste', 3, 'Tablespoons'),
 ('Pulled Pork (Instant Pot)', 'Vegetable Oil', 2, 'Teaspoons'),
+('Rice', 'Butter', 2, 'Tablespoons'),
+('Rice', 'Rice', 2, 'Cups'),
+('Rice', 'Salt', 0.5, 'Teaspoons'),
+('Rice', 'Water', 4, 'Cups'),
 ('Scrambled Egg and Asparagus Toast', 'Asparagus', 16, 'Ounces'),
 ('Scrambled Egg and Asparagus Toast', 'Bread', 4, 'Ounces'),
 ('Scrambled Egg and Asparagus Toast', 'Butter', 0.5, 'Ounces'),
@@ -413,6 +453,15 @@ INSERT INTO `ingredient` (`Rname`, `Iname`, `Amount`, `Unit`) VALUES
 ('Tortellini Carbonara', 'Heavy whipping cream', 2, 'Cups'),
 ('Tortellini Carbonara', 'Parsley (fresh, minced)', 0.5, 'Cups'),
 ('Tortellini Carbonara', 'Tortellini', 16, 'Ounces'),
+('Tortellini Soup', 'Broth (chicken)', 6, 'Cups'),
+('Tortellini Soup', 'Onion', 0.5, 'Cups'),
+('Tortellini Soup', 'Oregano', 0.25, 'Teaspoons'),
+('Tortellini Soup', 'Parsley', 2, 'Teaspoons'),
+('Tortellini Soup', 'Pepper (green)', 0.5, 'Cups'),
+('Tortellini Soup', 'Sausage (Italian, bulk)', 0.5, 'Pounds'),
+('Tortellini Soup', 'Tomato Sauce', 8, 'Ounces'),
+('Tortellini Soup', 'Tortellini', 0.75, 'Pounds'),
+('Tortellini Soup', 'Water', 4, 'Cups'),
 ('Udon (Beef)', 'Beef (thinly sliced)', 1, 'Pounds'),
 ('Udon (Beef)', 'Dashi', 4, 'Cups'),
 ('Udon (Beef)', 'Japanese Seven Spice', 1, 'Units/Packages'),
@@ -438,7 +487,17 @@ INSERT INTO `ingredient` (`Rname`, `Iname`, `Amount`, `Unit`) VALUES
 ('White Chicken Chili', 'Onion', 2, 'Units/Packages'),
 ('White Chicken Chili', 'Oregano', 1.5, 'Teaspoons'),
 ('White Chicken Chili', 'Pepper', 0.25, 'Teaspoons'),
-('White Chicken Chili', 'White beans', 48, 'Ounces');
+('White Chicken Chili', 'White beans', 48, 'Ounces'),
+('White Sauce Pasta /w/ shrimp', 'Butter', 4, 'Tablespoons'),
+('White Sauce Pasta /w/ shrimp', 'Cheese (Parmesan)', 0.25, 'Cups'),
+('White Sauce Pasta /w/ shrimp', 'Garlic (Minced)', 2, 'Tablespoons'),
+('White Sauce Pasta /w/ shrimp', 'Heavy Whipping Cream', 1, 'Cups'),
+('White Sauce Pasta /w/ shrimp', 'Onion (small, red)', 1, 'Units/Packages'),
+('White Sauce Pasta /w/ shrimp', 'Oregano', 0.5, 'Teaspoons'),
+('White Sauce Pasta /w/ shrimp', 'Pasta (Fetuccine)', 1, 'Pounds'),
+('White Sauce Pasta /w/ shrimp', 'Pepper', 0.5, 'Teaspoons'),
+('White Sauce Pasta /w/ shrimp', 'Salt', 0.5, 'Teaspoons'),
+('White Sauce Pasta /w/ shrimp', 'Shrimp', 0.5, 'Pounds');
 
 -- --------------------------------------------------------
 
@@ -446,11 +505,16 @@ INSERT INTO `ingredient` (`Rname`, `Iname`, `Amount`, `Unit`) VALUES
 -- Table structure for table `instruction`
 --
 
-CREATE TABLE `instruction` (
+CREATE TABLE IF NOT EXISTS `instruction` (
   `Rname` varchar(100) NOT NULL,
   `Step_num` tinyint(3) UNSIGNED NOT NULL,
-  `Step_instruction` varchar(500) DEFAULT NULL
+  `Step_instruction` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`Rname`,`Step_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- RELATIONSHIPS FOR TABLE `instruction`:
+--
 
 --
 -- Dumping data for table `instruction`
@@ -552,6 +616,14 @@ INSERT INTO `instruction` (`Rname`, `Step_num`, `Step_instruction`) VALUES
 ('Chicken Teriyaki', 2, 'Make chicken: In a large skillet over medium heat, heat oil. Add chicken to skillet and season with salt and pepper. Cook until golden and almost cooked through, about 10 minutes.'),
 ('Chicken Teriyaki', 3, 'Pour sauce over chicken and simmer until sauce has thickened slightly and chicken is cooked through, 5 minutes.'),
 ('Chicken Teriyaki', 4, 'Serve over rice with steamed broccoli.'),
+('Chicken/Turkey Pot Pie Casserole', 1, 'FILLING: Finely chop onion; chop carrot into half-moons.'),
+('Chicken/Turkey Pot Pie Casserole', 2, 'Combine broth, onion, carrots, and green beans in large pot; simmer over high heat, then reduce and simmer until vegetables are barely tender. Add peas.'),
+('Chicken/Turkey Pot Pie Casserole', 3, 'In separate bowl, stir water and 1/3 cup flour until smooth; add to pot and simmer until thickened.'),
+('Chicken/Turkey Pot Pie Casserole', 4, 'In separate pan, cook chicken as desired. Add to pot and mix, then pour mixture into 9x13 pan. Cook at 400F for 15 minutes.'),
+('Chicken/Turkey Pot Pie Casserole', 5, 'BISCUITS: In large bowl, mix 2 cups flour, salt, dill, and baking powder.'),
+('Chicken/Turkey Pot Pie Casserole', 6, 'Mix in butter until crumbly, then add milk and stir until barely mixed.'),
+('Chicken/Turkey Pot Pie Casserole', 7, 'Roll out dough into 1/2 inch thickness, cut roughly 12 circles with 2.5 inch diameter.'),
+('Chicken/Turkey Pot Pie Casserole', 8, 'COMBINE: Stir chicken mix, place biscuits on top, bake for 20 minutes, until golden.'),
 ('Chili 2, Pepper Boogaloo (Instant Pot)', 1, 'Add 1 Tbsp oil to Instant Pot, brown beef on High Saute.'),
 ('Chili 2, Pepper Boogaloo (Instant Pot)', 2, 'Transfer beef to plate with paper towel.'),
 ('Chili 2, Pepper Boogaloo (Instant Pot)', 3, 'Add 1 Tbsp oil to Instant Pot, saute onions and pepper for 3 minutes.'),
@@ -594,6 +666,15 @@ INSERT INTO `instruction` (`Rname`, `Step_num`, `Step_instruction`) VALUES
 ('Crockpot BBQ Chicken', 3, 'Pour over chicken, cover and cook on HIGH for 3-4 hours.'),
 ('Crockpot BBQ Chicken', 4, 'Once time is up, you can serve the breast whole, or shred with 2 forks. If shredding, recover and let cook in sauce for about 10-15 more minutes to soak up all that delish flavor.'),
 ('Crockpot BBQ Chicken', 5, 'Serve on buns, over rice, in wraps, on a salad or eat a plateful as is!  Our favorite way is on fresh rolls, topped with coleslaw.'),
+('Croquettes', 1, 'Make 2 pounds of Instant Pot Mashed Potatoes, quick release (pending testing), let dry. Mashing does not need to be perfect.'),
+('Croquettes', 2, 'Finely chop onion and carrot.'),
+('Croquettes', 3, 'Heat 2 Tablespoons oil in skillet. Saute onion until soft.'),
+('Croquettes', 4, 'Add carrots, cook until soft.'),
+('Croquettes', 5, 'Add meat, cook until brown. Add white pepper powder, salt, and pinch of pepper.'),
+('Croquettes', 6, 'In large pot or bowl, mix mashed potatoes, meat, and 1 egg until well combined; let cool until can be handled.'),
+('Croquettes', 7, 'Make balls as big as your heart desires.'),
+('Croquettes', 8, 'Cover each ball in flour, then egg, then panko.'),
+('Croquettes', 9, 'In about .5 inches of oil, deep fry balls until they are that sweet, sweet golden brown.'),
 ('Curry (Instant Pot)', 1, 'Cut onions into 10 wedges/onion. Peel carrot, cut into bite size pieces using Rangiri technique. Peel and cut potatoes into quarters (eighths if larger potatoes).'),
 ('Curry (Instant Pot)', 2, 'Cut meat into bite sized pieces.'),
 ('Curry (Instant Pot)', 3, 'Set Instant Pot to Saute Normal, add oil. When hot, add onion, garlic, and ginger.'),
@@ -641,6 +722,11 @@ INSERT INTO `instruction` (`Rname`, `Step_num`, `Step_instruction`) VALUES
 ('Kyle\'s Chocolate Chip Brownie Cake', 4, 'Pour into pan. Spread evenly.'),
 ('Kyle\'s Chocolate Chip Brownie Cake', 5, 'Bake 350F for 45 min'),
 ('Kyle\'s Chocolate Chip Brownie Cake', 6, 'Serve with ice cream and chocolate sauce.'),
+('Layered Ground Beef Casserole', 1, 'In 2 quart casserole dish, layer half the onion, celery, and green pepper.'),
+('Layered Ground Beef Casserole', 2, 'Top with beef; season with salt and pepper.'),
+('Layered Ground Beef Casserole', 3, 'Pour on tomato sauce. Top with remaining onion, celery, and green pepper; season with salt and pepper.'),
+('Layered Ground Beef Casserole', 4, 'Thinly slice potatoes and arrange on top; spread with soup.'),
+('Layered Ground Beef Casserole', 5, 'Bake uncovered at 350 degrees 1.5-2 hours or until potatoes are tender and top is lightly browned.'),
 ('Mac and Cheese (Instant Pot)', 1, 'Add uncooked macaroni, chicken stock, butter, garlic powder, pepper, and salt to the Instant Pot.'),
 ('Mac and Cheese (Instant Pot)', 2, 'Pressure cook on high for 5 minutes; quick release.'),
 ('Mac and Cheese (Instant Pot)', 3, 'Add the milk, then cheese in small handfuls while stirring.'),
@@ -677,6 +763,9 @@ INSERT INTO `instruction` (`Rname`, `Step_num`, `Step_instruction`) VALUES
 ('Pulled Pork (Instant Pot)', 10, 'Shred pork with 2 forks.'),
 ('Pulled Pork (Instant Pot)', 11, 'Add 3 cups of instant pot juices to the pork and mix.'),
 ('Pulled Pork (Instant Pot)', 12, 'Either mix barbecue sauce into pork, or serve with separate barbecue sauce.'),
+('Rice', 1, 'In a medium saucepan over medium heat, bring water to a boil. Add rice, butter, and a large pinch of salt.'),
+('Rice', 2, 'Bring pan back to a simmer then lower heat and cook, covered, 18 minutes, or until rice is tender and water is absorbed.'),
+('Rice', 3, 'Remove from heat and let sit, covered, 5 minutes, then fluff with a fork and serve.'),
 ('Scrambled Egg and Asparagus Toast', 1, 'Place one rack in the center of your oven and the other towards the top (I did the second from the topmost). Preheat the oven to 400 degrees F. Lay the asparagus in the center of a baking sheet, drizzle with the olive oil, and sprinkle with 1/4 teaspoon salt and 1/4 teaspoon pepper. Toss to coat, then spread the spears into a single layer. Roast for 15 to 20 minutes on the center rack, until the asparagus is crisp-tender. Remove the baking sheet from the oven, then turn the oven to broil.'),
 ('Scrambled Egg and Asparagus Toast', 2, 'Arrange the bread slices on a second baking sheet. Broil on the upper rack for 30 seconds to a few minutes, until golden (watch carefully so the bread doesn\'t burnâ€”the time can vary greatly by broiler. Don\'t walk away!), then flip the slices and toast the other side. Remove from the oven and set aside.'),
 ('Scrambled Egg and Asparagus Toast', 3, 'Meanwhile, in a medium mixing bowl, beat the eggs, milk, and remaining 1/4 teaspoon salt and 1/4 teaspoon pepper in a figure 8 pattern until completely blended. In a medium nonstick pan, melt the butter over medium-low. Once the butter has melted, reduce the heat to low and add the beaten eggs. Let cook, stirring very gently with a silicone spatula.'),
@@ -709,6 +798,9 @@ INSERT INTO `instruction` (`Rname`, `Step_num`, `Step_instruction`) VALUES
 ('Tortellini Carbonara', 2, 'Return bacon to pan; add cream, parsley, and cheese.'),
 ('Tortellini Carbonara', 3, 'Cook uncovered over med heat until heated through.'),
 ('Tortellini Carbonara', 4, 'Meanwhile, prepare tortellini according to package directions. Drain and toss with sauce.'),
+('Tortellini Soup', 1, 'Cook sausage, vegetables, and spices until brown. Drain.'),
+('Tortellini Soup', 2, 'In large pot, add meat & stuff, broth, water, and tomato sauce, simmer 1 hour.'),
+('Tortellini Soup', 3, 'Bring to boil, add tortellini, simmer for long enough to cook tortellini.'),
 ('Udon (Beef)', 1, 'In pan, add dashi and 2 tsp sugar. Add mirin and soy 2 Tbsp soy suce, bring to boil.'),
 ('Udon (Beef)', 2, 'Thinly slice onion.'),
 ('Udon (Beef)', 3, 'Add 2 Tbsp vegetable oil and onion to large frying pan. Add and cook beef.'),
@@ -723,7 +815,11 @@ INSERT INTO `instruction` (`Rname`, `Step_num`, `Step_instruction`) VALUES
 ('White Chicken Chili', 2, 'Stir in garlic, chiles, cumin, oregano, and pepper. Sautee 2 minutes.'),
 ('White Chicken Chili', 3, 'Add undrained beans and chicken broth. Bring to a boil.'),
 ('White Chicken Chili', 4, 'Reduce heat; add chicken and cheese until cheese melts.'),
-('White Chicken Chili', 5, 'Heat thoroughly. Serve with sour cream (optional).');
+('White Chicken Chili', 5, 'Heat thoroughly. Serve with sour cream (optional).'),
+('White Sauce Pasta /w/ shrimp', 1, 'Chop onion, saute with garlic in butter in large pot. (Maybe add shrimp here and cook)?'),
+('White Sauce Pasta /w/ shrimp', 2, 'Stir in chicken broth, salt, pepper, and oregano. Cook medium high until reduced by half (10 min).'),
+('White Sauce Pasta /w/ shrimp', 3, 'Stir in heavy cream and parmesan. Boil until thickened (5-10 min). Meanwhile, cook pasta as instructed.'),
+('White Sauce Pasta /w/ shrimp', 4, 'Mix with pasta and serve.');
 
 -- --------------------------------------------------------
 
@@ -731,14 +827,19 @@ INSERT INTO `instruction` (`Rname`, `Step_num`, `Step_instruction`) VALUES
 -- Table structure for table `recipe`
 --
 
-CREATE TABLE `recipe` (
+CREATE TABLE IF NOT EXISTS `recipe` (
   `Name` varchar(100) NOT NULL,
   `Course` varchar(25) DEFAULT NULL,
   `Instrument` varchar(25) DEFAULT NULL,
   `Prep_time` int(10) UNSIGNED DEFAULT NULL,
   `Cook_time` int(10) UNSIGNED DEFAULT NULL,
-  `Score` tinyint(3) UNSIGNED DEFAULT NULL
+  `Score` tinyint(3) UNSIGNED DEFAULT NULL,
+  PRIMARY KEY (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- RELATIONSHIPS FOR TABLE `recipe`:
+--
 
 --
 -- Dumping data for table `recipe`
@@ -762,6 +863,7 @@ INSERT INTO `recipe` (`Name`, `Course`, `Instrument`, `Prep_time`, `Cook_time`, 
 ('Chicken Parmesan', 'Entree', 'Oven', 20, 40, NULL),
 ('Chicken Pot Pie', 'Entree', 'Oven', 20, 40, NULL),
 ('Chicken Teriyaki', 'Entree', 'Stovetop', 15, 20, NULL),
+('Chicken/Turkey Pot Pie Casserole', 'Entree', 'Oven', 30, 60, NULL),
 ('Chili 2, Pepper Boogaloo (Instant Pot)', 'Entree', 'Instant Pot', 10, 45, NULL),
 ('Chocolate Pie with Whipped Cream', 'Dessert', 'Freezer', 45, 0, NULL),
 ('Chocolate-Stuffed French Toast', 'Breakfast', 'Oven', 30, 20, NULL),
@@ -769,6 +871,7 @@ INSERT INTO `recipe` (`Name`, `Course`, `Instrument`, `Prep_time`, `Cook_time`, 
 ('Creamed Corn', 'Side', 'Crockpot', 5, 240, NULL),
 ('Crock-Pot Lasagna', 'Entree', 'Crock-Pot', 20, 240, NULL),
 ('Crockpot BBQ Chicken', 'Entree', 'Crock-Pot', 15, 240, NULL),
+('Croquettes', 'Entree', 'Stovetop', 15, 105, NULL),
 ('Curry (Instant Pot)', 'Entree', 'Instant Pot', 20, 20, NULL),
 ('Famous Hotel Chocolate Chip Cookies', 'Dessert', 'Oven', 45, 15, NULL),
 ('Gooey Butter Cake', 'Dessert', 'Oven', 30, 30, NULL),
@@ -777,6 +880,7 @@ INSERT INTO `recipe` (`Name`, `Course`, `Instrument`, `Prep_time`, `Cook_time`, 
 ('Ice Cream Delight', 'Dessert', 'Freezer', 230, 0, NULL),
 ('Kentucky Bourbon Pie', 'Dessert', 'Oven', 15, 75, NULL),
 ('Kyle\'s Chocolate Chip Brownie Cake', 'Dessert', 'Oven', 15, 45, 8),
+('Layered Ground Beef Casserole', 'Entree', 'Oven', 20, 120, NULL),
 ('Mac and Cheese (Instant Pot)', 'Entree', 'Instant Pot', 5, 5, NULL),
 ('Mareinge Cookies', 'Dessert', 'Oven', 30, 25, NULL),
 ('Mashed Potatoes (Instant Pot)', 'Entree', 'Instant Pot', 10, 60, NULL),
@@ -784,129 +888,17 @@ INSERT INTO `recipe` (`Name`, `Course`, `Instrument`, `Prep_time`, `Cook_time`, 
 ('Meatloaf (Tasty)', 'Entree', 'Oven', 10, 60, NULL),
 ('Peanut Chicken Stir-Fry', 'Entree', 'Stovetop', 5, 15, NULL),
 ('Pulled Pork (Instant Pot)', 'Entree', 'Instant Pot', 45, 60, NULL),
+('Rice', 'Side', 'Stovetop', 10, 20, NULL),
 ('Scrambled Egg and Asparagus Toast', 'Breakfast', 'Oven', 5, 15, NULL),
 ('Sloppy Joes', 'Entree', 'Stovetop', 10, 15, NULL),
 ('Strawberry Shortcake', 'Dessert', 'Oven', 120, 25, 7),
 ('Tater Tot Casserole', 'Entree', 'Oven', 20, 60, NULL),
 ('Tortellini Carbonara', 'Entree', 'Stovetop', 0, 15, NULL),
+('Tortellini Soup', 'Entree', 'Stovetop', 15, 75, NULL),
 ('Udon (Beef)', 'Entree', 'Stovetop', 10, 15, NULL),
 ('Walnut Ham Linguine', 'Entree', 'Stovetop', 5, 10, NULL),
-('White Chicken Chili', 'Entree', 'Stovetop', 20, 60, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `review`
---
-
-CREATE TABLE `review` (
-  `Rname` varchar(100) NOT NULL,
-  `Reviewer` varchar(25) NOT NULL,
-  `Taste` tinyint(3) UNSIGNED DEFAULT NULL,
-  `Cost` tinyint(3) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `review`
---
-
-INSERT INTO `review` (`Rname`, `Reviewer`, `Taste`, `Cost`) VALUES
-('Beer Cheese Dip', 'Dave', 10, 9),
-('Kyle\'s Chocolate Chip Brownie Cake', 'Dave', 8, 7),
-('Strawberry Shortcake', 'Patrick Sanchez', 10, 3);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `selection`
---
-
-CREATE TABLE `selection` (
-  `Rname` varchar(100) NOT NULL,
-  `Iname` varchar(25) NOT NULL,
-  `Amount` double UNSIGNED DEFAULT NULL,
-  `Unit` varchar(25) NOT NULL DEFAULT 'Ounces'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `selection`
---
-
-INSERT INTO `selection` (`Rname`, `Iname`, `Amount`, `Unit`) VALUES
-('Beef Stroganoff', 'Butter', 2, 'Tablespoons'),
-('Beef Stroganoff', 'Cream Cheese', 4, 'Ounces'),
-('Beef Stroganoff', 'Milk', 0.667, 'Cups'),
-('Beef Stroganoff', 'Mustard (Dry)', 0.25, 'Teaspoons'),
-('Beef Stroganoff', 'Noodles', 1, 'Units/Packages'),
-('Beef Stroganoff', 'Pepper', 0.25, 'Teaspoons'),
-('Beef Stroganoff', 'Salt', 0.5, 'Teaspoons'),
-('Beef Stroganoff', 'Sliced Mushroom', 3, 'Ounces'),
-('Beef Stroganoff', 'Steak', 1, 'Pounds'),
-('Peanut Chicken Stir-Fry', 'Broccoli', 3, 'Cups'),
-('Peanut Chicken Stir-Fry', 'Brown sugar', 1, 'Tablespoons'),
-('Peanut Chicken Stir-Fry', 'Chicken', 1, 'Pounds'),
-('Peanut Chicken Stir-Fry', 'Corn starch', 1, 'Tablespoons'),
-('Peanut Chicken Stir-Fry', 'Garlic (minced)', 3, 'Teaspoons'),
-('Peanut Chicken Stir-Fry', 'Pasta (or rice)', 4, 'Units/Packages'),
-('Peanut Chicken Stir-Fry', 'Peanut butter', 0.25, 'Cups'),
-('Peanut Chicken Stir-Fry', 'Soy sauce', 3, 'Tablespoons'),
-('Peanut Chicken Stir-Fry', 'Vegetable oil', 2, 'Tablespoons'),
-('Sloppy Joes', 'Beef bouillon', 2, 'Units/Packages'),
-('Sloppy Joes', 'Green pepper', 0.5, 'Cups'),
-('Sloppy Joes', 'Ground beef', 1, 'Pounds'),
-('Sloppy Joes', 'Hamburger buns', 4, 'Units/Packages'),
-('Sloppy Joes', 'Ketchup', 1, 'Cups'),
-('Sloppy Joes', 'Mustard', 1, 'Teaspoons'),
-('Sloppy Joes', 'Onion', 0.5, 'Cups'),
-('Sloppy Joes', 'Sugar', 2, 'Teaspoons'),
-('Sloppy Joes', 'Water', 0.25, 'Cups'),
-('Tortellini Carbonara', 'Bacon', 10, 'Units/Packages'),
-('Tortellini Carbonara', 'Cheese (parmesan)', 1, 'Cups'),
-('Tortellini Carbonara', 'Heavy whipping cream', 2, 'Cups'),
-('Tortellini Carbonara', 'Parsley (fresh, minced)', 0.5, 'Cups'),
-('Tortellini Carbonara', 'Tortellini', 16, 'Ounces'),
-('Udon (Beef)', 'Beef (thinly sliced)', 1, 'Pounds'),
-('Udon (Beef)', 'Dashi', 4, 'Cups'),
-('Udon (Beef)', 'Japanese Seven Spice', 1, 'Units/Packages'),
-('Udon (Beef)', 'Mirin', 2, 'Tablespoons'),
-('Udon (Beef)', 'Onion (green)', 2, 'Units/Packages'),
-('Udon (Beef)', 'Soy Sauce', 4, 'Tablespoons'),
-('Udon (Beef)', 'Sugar', 1.5, 'Tablespoons'),
-('Udon (Beef)', 'Udon', 4, 'Units/Packages');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `ingredient`
---
-ALTER TABLE `ingredient`
-  ADD PRIMARY KEY (`Rname`,`Iname`);
-
---
--- Indexes for table `instruction`
---
-ALTER TABLE `instruction`
-  ADD PRIMARY KEY (`Rname`,`Step_num`);
-
---
--- Indexes for table `recipe`
---
-ALTER TABLE `recipe`
-  ADD PRIMARY KEY (`Name`);
-
---
--- Indexes for table `review`
---
-ALTER TABLE `review`
-  ADD PRIMARY KEY (`Rname`,`Reviewer`);
-
---
--- Indexes for table `selection`
---
-ALTER TABLE `selection`
-  ADD PRIMARY KEY (`Rname`,`Iname`);
+('White Chicken Chili', 'Entree', 'Stovetop', 20, 60, NULL),
+('White Sauce Pasta /w/ shrimp', 'Entree', 'Stovetop', 15, 20, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
