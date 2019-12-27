@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2019 at 01:58 AM
+-- Generation Time: Dec 27, 2019 at 11:30 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -172,8 +172,9 @@ INSERT INTO `ingredient` (`Rname`, `Iname`, `Amount`, `Unit`) VALUES
 ('Chicken Parmesan', 'Marinara sauce', 26, 'Ounces'),
 ('Chicken Parmesan', 'Pasta', 12, 'Ounces'),
 ('Chicken Parmesan', 'Water', 1, 'Tablespoons'),
-('Chicken Pot Pie', '9\'\' Frozen Pie Crust', 4, 'Units/Packages'),
-('Chicken Pot Pie', 'Chicken', 4, 'Cups'),
+('Chicken Pot Pie', '9\'\' Frozen Pie Crust', 2, 'Units/Packages'),
+('Chicken Pot Pie', '9\'\' Frozen Pie Crust Deep', 2, 'Units/Packages'),
+('Chicken Pot Pie', 'Chicken', 2, 'Pounds'),
 ('Chicken Pot Pie', 'Cream of Potato Soup', 4, 'Cans'),
 ('Chicken Pot Pie', 'Heavy Whipping Cream', 1, 'Cups'),
 ('Chicken Pot Pie', 'Pepper', 1, 'Tablespoons'),
@@ -605,9 +606,9 @@ INSERT INTO `instruction` (`Rname`, `Step_num`, `Step_instruction`) VALUES
 ('Chicken Parmesan', 7, 'Place 2 tablespoons marinara on each breast and top with mozzarella and parmesan.'),
 ('Chicken Parmesan', 8, 'Bake for 8-10 minutes or until cheese is melted.'),
 ('Chicken Parmesan', 9, 'Cook pasta according to package directions and serve with the chicken.'),
-('Chicken Pot Pie', 1, 'Combine first 5 ingredients. (Drain the Veg-All).'),
-('Chicken Pot Pie', 2, 'Spoon into a pie crust.'),
-('Chicken Pot Pie', 3, 'Cover with other pie crust. Crimp edges to seal.'),
+('Chicken Pot Pie', 1, 'Cook the chicken. Combine chicken, soup, cream, pepper, and Veg-All (drained).'),
+('Chicken Pot Pie', 2, 'Spoon into deep dish pie crusts.'),
+('Chicken Pot Pie', 3, 'Cover with other pie crusts. Crimp edges to seal.'),
 ('Chicken Pot Pie', 4, 'Put slit in top crust.'),
 ('Chicken Pot Pie', 5, 'Bake 375 degrees for 40 min.'),
 ('Chicken Pot Pie', 6, 'Cool 10 min. (Optional)'),
