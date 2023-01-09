@@ -29,9 +29,20 @@ function printDiv() {
 // Get a connection for the database
 require_once('mysqli_connect.php');
 
-if(isset($_POST['Delete']))
+if(isset($_POST['DeleteAll']))
 {
   $query = "DELETE FROM Selection";
+  if(!@mysqli_query($dbc, $query))
+  {
+    echo "Couldn't delete database entries<br />";
+    echo mysqli_error($dbc);
+  }
+}
+if(isset($_POST['DeleteRname']))
+{
+  $query = "DELETE FROM Selection
+            WHERE Rname = \"".$dbc->escape_string($_POST['DeleteRname'])."\"
+            AND Iname = \"".$dbc->escape_string($_POST['DeleteIname'])."\";";
   if(!@mysqli_query($dbc, $query))
   {
     echo "Couldn't delete database entries<br />";
@@ -102,22 +113,21 @@ if($info)
   
   echo '<td id="printMe"><table align="left"
   cellspacing="5" cellpadding="8">
-  <tr><td style="padding: 12 12 0 0"><b>Ingredient</b></td>
+  <tr><td style="padding: 2 12 0 0"></td>
+  <td style="padding: 12 12 0 0"><b>Ingredient</b></td>
   <td style="padding: 12 2 0 0"><b>Amount</b></td></tr>';
-  $ingredient_list = [];
   while($row = mysqli_fetch_array($info))
   {
-    $ingredient_list[] = $row['Iname'];
-    $amount_list[] = $row['Amount'];
-    $unit_list[] = $row['Unit'];
+    echo '<tr><td style="padding: 2 12 0 0">
+    <form style="display:inline" action="selection.php" method="post">
+      <input type="hidden" name="DeleteRname" value="'.$row['Rname'].'"/>
+      <button type="submit" name="DeleteIname" value="'.$row['Iname'].'"><b>❌</b></button>
+    </form></td>
+    <td style="padding: 2 12 0 0">'.$row['Iname'].'</td>
+    <td style="padding: 2 2 0 0; text-align: right">'.$row['Amount'].'</td>
+    <td style="padding: 2 12 0 0">'.$row['Unit'].'</td></tr>';
   }
   
-  for($i = 0; $i < sizeof($ingredient_list); $i++)
-  {
-    echo '<tr><td style="padding: 2 12 0 0">'.$ingredient_list[$i].'</td>
-    <td style="padding: 2 2 0 0; text-align: right">'.$amount_list[$i].'</td>
-    <td style="padding: 2 12 0 0">'.$unit_list[$i].'</td></tr>';
-  }
   echo '</table></td></tr></table>';
   
   
@@ -143,7 +153,7 @@ mysqli_close($dbc);
   <div class="box-cell edges">
     <h2>Osterman 2019</h2>
     <form style="display:inline" action="#" method="post"><button class="menubutton" onclick="return printDiv()" name="Print" value="foo"><b>Print List</b></button></form>
-    <form style="display:inline" action="selection.php" method="post" onsubmit="return confirm('Are you sure? This will de-select all recipes!');"><button class="menubutton" type="submit" name="Delete" value="Delete"><b>Mark as Bought</b></button></form>
+    <form style="display:inline" action="selection.php" method="post" onsubmit="return confirm('Are you sure? This will de-select all recipes!');"><button class="menubutton" type="submit" name="DeleteAll" value="DeleteAll"><b>Remove All</b></button></form>
   </div>
 
 </div></div></div>
