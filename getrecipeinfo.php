@@ -83,22 +83,22 @@ if(isset($_POST['SearchBy']))
 {
   $_POST['Term'] = str_replace("\"", "''", $_POST['Term']);
   if($_POST['SearchBy'] == 'Name')
-    $query .= " WHERE Name = \"".$dbc->escape_string($_POST['Term'])."\"";
+    $query .= " WHERE Name LIKE \"%".$dbc->escape_string($_POST['Term'])."%\"";
   else if($_POST['SearchBy'] == 'Course')
-    $query .= " WHERE Course = \"".$dbc->escape_string($_POST['Term'])."\"";
+    $query .= " WHERE Course LIKE \"%".$dbc->escape_string($_POST['Term'])."%\"";
   else if($_POST['SearchBy'] == 'Instrument')
-    $query .= " WHERE Instrument = \"".$dbc->escape_string($_POST['Term'])."\"";
+    $query .= " WHERE Instrument LIKE \"%".$dbc->escape_string($_POST['Term'])."%\"";
   else if($_POST['SearchBy'] == 'Time')
     $query .= " WHERE Prep_time + Cook_time <= ".$dbc->escape_string($_POST['Term']);
   else if($_POST['SearchBy'] == 'Score')
     $query .= " WHERE Score >= ".$dbc->escape_string($_POST['Term']);
   else if($_POST['SearchBy'] == 'Ingredient')
-    $query .= " WHERE EXISTS (SELECT * FROM Ingredient WHERE Rname = Name AND Iname = \"".$dbc->escape_string($_POST['Term'])."\")";
+    $query .= " WHERE EXISTS (SELECT * FROM Ingredient WHERE Rname = Name AND Iname LIKE \"%".$dbc->escape_string($_POST['Term'])."%\")";
 }
 else
 {
-  $_POST['SearchBy'] = 'None';
-  $_POST['Term'] = 'None';
+  $_POST['SearchBy'] = '';
+  $_POST['Term'] = '';
 }
 
 //qualifies the query with sorting method
@@ -221,7 +221,7 @@ mysqli_close($dbc);
         <option value="Score" <?php if($_POST['SearchBy'] == 'Score')echo"selected='selected'>";else echo ">";?>Score greater than</option>
         <option value="Ingredient" <?php if($_POST['SearchBy'] == 'Ingredient')echo"selected='selected'>";else echo ">";?>Includes ingredient</option>
       </select>
-      <input class="menusearch" name="Term" placeholder="Search Term">
+      <input class="menusearch" name="Term" placeholder = "Search Term" value="<?php if(isset($_POST['Term']))echo$_POST['Term'];else echo 'Search Term';?>">
       <button class="menubutton" type="submit" name="submit" value="Submit"><b>Refresh Search</b></button>
     </form>
   </div>

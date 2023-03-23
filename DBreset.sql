@@ -34,6 +34,7 @@ CREATE TABLE Selection (
   Rname VARCHAR(100) REFERENCES Recipe(Name),
   Iname VARCHAR(25),
   Amount DOUBLE UNSIGNED,
+  Unit VARCHAR(25) DEFAULT 'Ounces',
   PRIMARY KEY(Rname, Iname)
 );
 
