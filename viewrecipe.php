@@ -100,14 +100,6 @@ $selectionInfo = @mysqli_query($dbc, $query);
 $scoreQuery = "SELECT AVG(Taste) AS 'taste', AVG(Cost) AS 'cost' FROM Review WHERE Rname = \"".$dbc->escape_string($_POST['Name'])."\";";
     $scoreData = @mysqli_query($dbc, $scoreQuery);
     $Score = mysqli_fetch_array($scoreData);
-    if($Score['taste'] == NULL)
-      $Score['taste'] = "N.A.";
-    else
-      $Score['taste'] = round($Score['taste'], 1);
-    if($Score['cost'] == NULL)
-      $Score['cost'] = "N.A.";
-    else
-      $Score['cost'] = round($Score['cost'], 1);
 
 // If the query executed properly proceed
 if($info)
@@ -116,10 +108,14 @@ if($info)
   echo '<h1 class="header">'.$info['Name'].'</h1>';
   echo ''.$info['Course'].'<br>';
   echo ''.$info['Instrument'].'<br>';
-  echo '<b>Prep Time: </b>'.$info['Prep_time'].'<br>';
-  echo '<b>Cook Time: </b>'.$info['Cook_time'].'<br>';
-  echo '<b>Taste Score: </b>'.$Score['taste'].'<br>';
-  echo '<b>Cost Efficiency Score: </b>'.$Score['cost'].'<br>';
+  echo '<b>Prep Time: </b>'.$info['Prep_time'].' minutes<br>';
+  echo '<b>Cook Time: </b>'.$info['Cook_time'].' minutes<br>';
+
+  if($Score['taste'] != NULL)
+    echo '<b>Taste Score: </b>'.round($Score['taste'], 1).'<br>';
+
+  if($Score['cost'] != NULL)
+    echo '<b>Cost Efficiency Score: </b>'.round($Score['cost'], 1).'<br>';
 }
 else
 {
