@@ -88,23 +88,23 @@ return false;
 <input type="text" name="Instrument" size="30" maxlength="25" value="" placeholder="e.g. grill, stovetop, oven" required/>
 </p>
 
-<p><b>Prep. Time:</b><br>
+<p><b>Prep. Time (minutes):</b><br>
 <input type="number" name="Prep_time" size="30" value="" min="0" required/>
 </p>
 
-<p><b>Cook Time:</b><br>
+<p><b>Cook Time (minutes):</b><br>
 <input type="number" name="Cook_time" size="30" value="" min="0" required/>
 </p>
 
 <table id="addIngredients" align="left" cellspacing="0" cellpadding="0">
   <tr><td align="left" style="padding:0; margin:0"><b>Ingredients:</b></td>
   <td align="left"><b>Amount:</b></td></tr>
-  <tr><td style="padding: 2 20px 0 0; margin:0"><input type="text" name="Ingredient_1" size="30" maxlength="25" value="" required/> </td><td style="padding: 2 20px 0 0; margin:0"> <input type="number" name="Amount_1" size="5" value="" min="0" step="any" required/> </td><td style="padding: 2 20px 0 0; margin:0"> <select name="Unit_1" value="" required> <option disabled selected value="">Choose unit...</option> <option>Teaspoons</option> <option>Tablespoons</option> <option>Fluid Ounces</option> <option>Cups</option> <option>Pints</option> <option>Quarts</option> <option>Gallons</option> <option>Ounces</option> <option>Pounds</option> <option>Cans</option> <option>Units/Packages</option> </select> </td><td style="padding: 2 20px 0 0; margin:0"><button id="addNewIngredient">Add Another Ingredient</button></td></tr>
+  <tr><td style="padding: 2 20px 0 0; margin:0"><input type="text" name="Ingredient_1" size="30" maxlength="25" value="" required/> </td><td style="padding: 2 20px 0 0; margin:0"> <input type="number" name="Amount_1" size="5" value="" min="0" step="any" required/> </td><td style="padding: 2 20px 0 0; margin:0"> <select name="Unit_1" value="" required> <option disabled selected value="">Choose unit...</option> <option>Teaspoons</option> <option>Tablespoons</option> <option>Fluid Ounces</option> <option>Cups</option> <option>Pints</option> <option>Quarts</option> <option>Gallons</option> <option>Ounces</option> <option>Pounds</option> <option>Cans</option> <option>Units/Packages</option> </select> </td><td style="display:inline; padding: 2 20px 0 0; margin:0"><button id="addNewIngredient">➕</button></td></tr>
 </table>
 
 <table id="addInstructions" align="left" cellspacing="0" cellpadding="0">
   <tr><td align="left" style="padding:15px 0 0 0; margin:0"><b>Instructions:</b></td></tr>
-  <tr><td style="padding: 2 20px 0 0; margin:0"><input type="text" name="Instruction_1" size="100" maxlength="500" value="" required/> </td><td><button id="addNewInstruction">Add Another Step</button></td></tr>
+  <tr><td style="padding: 2 20px 0 0; margin:0"><input type="text" name="Instruction_1" size="100" maxlength="500" value="" required/> </td><td style="display:inline; padding: 2 20px 0 0; margin:0"><button id="addNewInstruction">➕</button></td></tr>
 </table>
 
   </div>
