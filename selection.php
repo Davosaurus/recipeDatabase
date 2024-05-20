@@ -38,7 +38,7 @@ if(isset($_POST['DeleteAll']))
     echo mysqli_error($dbc);
   }
 }
-if(isset($_POST['DeleteRname']))
+if(isset($_POST['DeleteIname']))
 {
   $query = "DELETE FROM Selection
             WHERE Rname = \"".$dbc->escape_string($_POST['DeleteRname'])."\"
@@ -48,6 +48,19 @@ if(isset($_POST['DeleteRname']))
     echo "Couldn't delete database entries<br />";
     echo mysqli_error($dbc);
   }
+}
+else
+{
+	if(isset($_POST['DeleteRname']))
+	{
+	  $query = "DELETE FROM Selection
+				WHERE Rname = \"".$dbc->escape_string($_POST['DeleteRname'])."\";";
+	  if(!@mysqli_query($dbc, $query))
+	  {
+		echo "Couldn't delete database entries<br />";
+		echo mysqli_error($dbc);
+	  }
+	}
 }
 
 $query = "SELECT DISTINCT Rname
@@ -63,12 +76,17 @@ if($info)
   echo '<tr><td><table align="left"
   cellspacing="5" cellpadding="8">
 
-  <tr><td><b>Recipe Name</b></td></tr>';
+  <tr><td colspan="2"><b>Recipe Name</b></td></tr>';
 
   $isEmpty = true;
   while($row = mysqli_fetch_array($info))
   {
-    echo '<tr><td><form action="viewrecipe.php" method="post">
+    echo '<tr>
+	<td style="padding: 2 12 0 0">
+    <form style="display:inline" action="selection.php" method="post">
+      <button type="submit" name="DeleteRname" value="'.$row['Rname'].'"><b>❌</b></button>
+    </form></td>
+	<td style="padding: 2 12 0 0"><form action="viewrecipe.php" method="post">
     <input style="background:none; color:inherit; font:inherit; text-align:left; border:none; cursor:pointer; text-decoration:underline; padding:0; word-break:break-word; white-space:normal; max-width: 400px;" type="submit" name="Name" value="'.$row['Rname'].'" />
     </form></td></tr>';
     $isEmpty = false;
@@ -88,29 +106,7 @@ $info = @mysqli_query($dbc, $query);
 
 // If the query executed properly proceed
 if($info)
-{
-  /*
-  echo '<td id="printMe"><table align="left"
-  cellspacing="5" cellpadding="8">
-  <tr><td><b>Ingredient</b></td>
-  <td><b>Amount</b></td></tr>';
-  $ingredient_list = [];
-  while($row = mysqli_fetch_array($info))
-  {
-    if(array_key_exists($row['Iname'], $ingredient_list))
-      $ingredient_list[$row['Iname']] += $row['Amount'];
-    else
-      $ingredient_list[$row['Iname']] = $row['Amount'];
-  }
-  foreach($ingredient_list as $Iname => $Amount)
-  {
-    echo '<tr><td>'.$Iname.'</td><td>'.$Amount.'</td>';
-    echo '</tr>';
-  }
-  echo '</table></td></tr></table>';
-  */
-  
-  
+{ 
   echo '<td id="printMe"><table align="left"
   cellspacing="5" cellpadding="8">
   <tr><td style="padding: 2 12 0 0"></td>
