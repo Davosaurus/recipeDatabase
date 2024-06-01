@@ -14,6 +14,11 @@ body {
 td {
   vertical-align: top;
 }
+iframe {
+  margin: 0;
+  border: none;
+  padding: 0;
+}
 .header {
   color: #FFA500;
 }
@@ -31,13 +36,17 @@ td {
   padding: 10px;
 }
 .container .box .box-cell.edges {
+  position: fixed;
   width: 15%;
+  height: 100%;
   background: #528052;
   color: #000000;
   vertical-align: top;
   padding-bottom: 80px;
 }
 .container .box .box-cell.center { 
+  position: relative;
+  left: 2%;
   width: 70%;
   max-width: 70%;
   padding-bottom: 80px;
@@ -47,7 +56,7 @@ td {
   height: 50px;
   border: 2px solid #000000;
   background-color: #FFA500; /*#828081;*/
-  width: 100%;
+  width: 90%;
   text-align: left;
   font-size: 16px;
   padding: 5px;
@@ -57,7 +66,7 @@ td {
   display: block;
   height: 54px;
   background-color: #FFB550; /*#C2C0C1;*/
-  width: 100%;
+  width: 95%;
   text-align: left;
   font-size: 16px;
   padding: 5px;
