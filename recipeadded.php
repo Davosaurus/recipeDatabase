@@ -5,13 +5,8 @@
 
 <body>
 
-<div class="container"><div class="box"><div class="box-row"> 
-  <div class="box-cell edges">
-    <h2>Recipe Database</h2>
-    <button class="menubutton" onclick="window.location.href='addrecipe.php';"><b><span class="icon">➕</span>Add New Recipe</b></button>
-    <button class="menubutton" onclick="window.location.href='getrecipeinfo.php';"><b><span class="icon">🔍</span>Search</b></button>
-    <button class="menubutton" onclick="window.location.href='selection.php';"><b><span class="icon">☰</span>Manage Selection</b></button>
-  </div>
+<div class="container"><div class="box"><div class="box-row">
+  <iframe class="box-cell edges" src="sidebar.php"></iframe>
   <div class="box-cell center">
 
 <?php 
