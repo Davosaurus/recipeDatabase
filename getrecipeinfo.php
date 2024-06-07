@@ -6,7 +6,7 @@
 <body>
 
 <div class="container"><div class="box"><div class="box-row">
-  <iframe class="box-cell edges" src="sidebar.php"></iframe>
+  <iframe class="iframe box-cell edges" src="sidebar.php"></iframe>
   <div class="box-cell center">
     
 <?php

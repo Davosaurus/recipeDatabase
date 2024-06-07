@@ -14,11 +14,6 @@ body {
 td {
   vertical-align: top;
 }
-iframe {
-  margin: 0;
-  border: none;
-  padding: 0;
-}
 .header {
   color: #FFA500;
 }
@@ -44,9 +39,13 @@ iframe {
   vertical-align: top;
   padding-bottom: 80px;
 }
+.iframe.box-cell.edges {
+  margin: 0;
+  border: none;
+  padding: 0;
+}
 .container .box .box-cell.center { 
   position: relative;
-  left: 2%;
   width: 70%;
   max-width: 70%;
   padding-bottom: 80px;
