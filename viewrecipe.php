@@ -13,6 +13,7 @@
 // Get a connection for the database
 require_once('mysqli_connect.php');
 
+// If a new review is being posted
 if(isset($_POST['Review']))
 {
   $query = "INSERT INTO Review (Rname, Reviewer, Taste, Cost) VALUES (?, ?, ?, ?)";
@@ -28,9 +29,21 @@ if(isset($_POST['Review']))
   }
   else
   {
-    echo 'Error occured!';
+    echo 'Error occured! ';
     echo mysqli_error($dbc);
   }
+}
+
+// Get aggregate review data
+$scoreQuery = "SELECT AVG(Taste) AS 'taste', AVG(Cost) AS 'cost' FROM Review WHERE Rname = \"".$dbc->escape_string($_POST['Name'])."\";";
+$score = mysqli_fetch_array(@mysqli_query($dbc, $scoreQuery));
+
+if(isset($_POST['Review']))
+{
+  // Update average score in recipe table
+  $combinedScore = ( $score['taste'] + $score['cost'] ) / 2;
+  $scoreUpdateQuery = "UPDATE Recipe SET Score = ".$combinedScore." WHERE Name = \"".$dbc->escape_string($_POST['Name'])."\"";
+  @mysqli_query($dbc, $scoreUpdateQuery);
 }
 
 $query = "SELECT Rname, Iname, Amount, Unit
@@ -77,7 +90,7 @@ else if(isset($_POST['Deselect']))
             WHERE Rname = \"".$dbc->escape_string($_POST['Name'])."\";";
   if(!@mysqli_query($dbc, $query))
   {
-    echo "Couldn't delete database entry<br />";
+    echo "Couldn't delete database entry<br>";
     echo mysqli_error($dbc);
   }
 }
@@ -92,10 +105,6 @@ $query = "SELECT Rname, Iname, Amount
           WHERE Rname = \"".$dbc->escape_string($_POST['Name'])."\";";
 $selectionInfo = @mysqli_query($dbc, $query);
 
-$scoreQuery = "SELECT AVG(Taste) AS 'taste', AVG(Cost) AS 'cost' FROM Review WHERE Rname = \"".$dbc->escape_string($_POST['Name'])."\";";
-    $scoreData = @mysqli_query($dbc, $scoreQuery);
-    $Score = mysqli_fetch_array($scoreData);
-
 // If the query executed properly proceed
 if($info)
 {
@@ -106,15 +115,15 @@ if($info)
   echo '<b>Prep Time: </b>'.$info['Prep_time'].' minutes<br>';
   echo '<b>Cook Time: </b>'.$info['Cook_time'].' minutes<br>';
 
-  if($Score['taste'] != NULL)
-    echo '<b>Taste Score: </b>'.round($Score['taste'], 1).'<br>';
+  if($score['taste'] != NULL)
+    echo '<b>Taste Score: </b>'.round($score['taste'], 1).'<br>';
 
-  if($Score['cost'] != NULL)
-    echo '<b>Cost Efficiency Score: </b>'.round($Score['cost'], 1).'<br>';
+  if($score['cost'] != NULL)
+    echo '<b>Cost Efficiency Score: </b>'.round($score['cost'], 1).'<br>';
 }
 else
 {
-  echo "Couldn't issue database query<br />";
+  echo "Couldn't issue database query<br>";
   echo mysqli_error($dbc);
 }
 
@@ -138,7 +147,7 @@ if($ingredients)
 }
 else
 {
-  echo "Couldn't issue database query<br />";
+  echo "Couldn't issue database query<br>";
   echo mysqli_error($dbc);
 }
 
@@ -169,7 +178,7 @@ if($instructions)
 }
 else
 {
-  echo "Couldn't issue database query<br />";
+  echo "Couldn't issue database query<br>";
   echo mysqli_error($dbc);
 }
 

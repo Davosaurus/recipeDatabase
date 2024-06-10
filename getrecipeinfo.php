@@ -55,20 +55,6 @@ if(!empty($_POST['Delete']))
     echo mysqli_error($dbc);
   }
 }
-
-$query = "SELECT * FROM Recipe";
-$response = @mysqli_query($dbc, $query);
-
-while($row = mysqli_fetch_array($response))
-{
-  //run query to get average score
-  $scoreQuery = "SELECT (AVG(Taste)+AVG(Cost))/2 AS 'avg' FROM Review WHERE Rname = \"".$dbc->escape_string($row['Name'])."\"";
-  $scoreData = @mysqli_query($dbc, $scoreQuery);
-  $Score = mysqli_fetch_array($scoreData);
-  
-  $newScoreQuery = "UPDATE Recipe SET Score = ".$Score['avg']." WHERE Name = \"".$dbc->escape_string($row['Name'])."\"";
-  @mysqli_query($dbc, $newScoreQuery);
-}
   
 // Create a query for the database
 $query = "SELECT Name, Course, Instrument, Prep_time, Cook_time, Score FROM Recipe";
