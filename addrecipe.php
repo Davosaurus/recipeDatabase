@@ -107,7 +107,7 @@ return false;
   </div>
   <div class="box-cell edges">
     <h2>Osterman 2019</h2>
-  <button class='menubutton' type='submit' name='submit' value='Submit'><b>Submit Recipe</b></button>
+  <button class='menubutton right' type='submit' name='submit' value='Submit'><b>Submit Recipe</b></button>
   </div>
 </form>
 </div></div></div>

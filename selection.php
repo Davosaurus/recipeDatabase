@@ -143,8 +143,8 @@ mysqli_close($dbc);
   </div>
   <div class="box-cell edges">
     <h2>Osterman 2019</h2>
-    <form style="display:inline" action="#" method="post"><button class="menubutton" onclick="return printDiv()" name="Print" value="foo"><b>Print List</b></button></form>
-    <form style="display:inline" action="selection.php" method="post" onsubmit="return confirm('Are you sure? This will de-select all recipes!');"><button class="menubutton" type="submit" name="DeleteAll" value="DeleteAll"><b>Remove All</b></button></form>
+    <form style="display:inline" action="#" method="post"><button class="menubutton right" onclick="return printDiv()" name="Print" value="foo"><b>Print List</b></button></form>
+    <form style="display:inline" action="selection.php" method="post" onsubmit="return confirm('Are you sure? This will de-select all recipes!');"><button class="menubutton right" type="submit" name="DeleteAll" value="DeleteAll"><b>Remove All</b></button></form>
   </div>
 
 </div></div></div>

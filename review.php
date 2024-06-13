@@ -32,7 +32,7 @@ echo '<p><b>Reviewer:</b><br>
   </div>
   <div class="box-cell edges">
     <h2>Osterman 2019</h2>
-  <button class='menubutton' type='submit' name='Review' value='Submit'><b>Submit Review</b></button>
+  <button class='menubutton right' type='submit' name='Review' value='Submit'><b>Submit Review</b></button>
   </div>
 </form>
 </div></div></div>

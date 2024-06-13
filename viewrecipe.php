@@ -188,16 +188,16 @@ else
 
   if(mysqli_num_rows($selectionInfo)==0)
   {
-    echo "<form style='display:inline' action='viewrecipe.php' method='post'><input type='hidden' name='Name' value=\"".$info['Name']."\"><button class='menubutton' type='submit' name='Select' value=\"".$info['Name']."\"><b>Add to Selection</b></button></form>";
+    echo "<form style='display:inline' action='viewrecipe.php' method='post'><input type='hidden' name='Name' value=\"".$info['Name']."\"><button class='menubutton right' type='submit' name='Select' value=\"".$info['Name']."\"><b>Add to Selection</b></button></form>";
   }
   else
   {
-    echo "<form style='display:inline' action='viewrecipe.php' method='post'><input type='hidden' name='Name' value=\"".$info['Name']."\"><button class='menubutton' type='submit' name='Deselect' value=\"".$info['Name']."\"><b>Remove from Selection</b></button></form>";
+    echo "<form style='display:inline' action='viewrecipe.php' method='post'><input type='hidden' name='Name' value=\"".$info['Name']."\"><button class='menubutton right' type='submit' name='Deselect' value=\"".$info['Name']."\"><b>Remove from Selection</b></button></form>";
   }
   
   echo "
-    <form style='display:inline' action='review.php' method='post'><button class='menubutton' type='submit' name='Name' value=\"".$info['Name']."\"><b>Write Review</b></button></form>
-    <form style='display:inline' action='getrecipeinfo.php' method='post' onsubmit=\"return confirm('Are you sure? This will permanently delete this recipe!');\"><button class='menubutton' type='submit' name='Delete' value=\"".$info['Name']."\"><b>Delete Recipe</b></button></form>
+    <form style='display:inline' action='review.php' method='post'><button class='menubutton right' type='submit' name='Name' value=\"".$info['Name']."\"><b>Write Review</b></button></form>
+    <form style='display:inline' action='getrecipeinfo.php' method='post' onsubmit=\"return confirm('Are you sure? This will permanently delete this recipe!');\"><button class='menubutton right' type='submit' name='Delete' value=\"".$info['Name']."\"><b>Delete Recipe</b></button></form>
   </div>";
 
 // Close connection to the database

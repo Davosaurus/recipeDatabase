@@ -194,7 +194,7 @@ mysqli_close($dbc);
   <div class="box-cell edges">
     <h2>Osterman 2019</h2>
     <form style="display:inline" action="getrecipeinfo.php" method="post">
-      <select class="menusearch" name="SearchBy">
+      <select class="menusearch right" name="SearchBy">
         <option value="Name" <?php if($_POST['SearchBy'] == 'Name')echo"selected='selected'>";else echo ">";?>Recipe name</option>
         <option value="Course" <?php if($_POST['SearchBy'] == 'Course')echo"selected='selected'>";else echo ">";?>Dish type</option>
         <option value="Instrument" <?php if($_POST['SearchBy'] == 'Instrument')echo"selected='selected'>";else echo ">";?>Cooking instrument</option>
@@ -202,8 +202,8 @@ mysqli_close($dbc);
         <option value="Score" <?php if($_POST['SearchBy'] == 'Score')echo"selected='selected'>";else echo ">";?>Score greater than</option>
         <option value="Ingredient" <?php if($_POST['SearchBy'] == 'Ingredient')echo"selected='selected'>";else echo ">";?>Includes ingredient</option>
       </select>
-      <input class="menusearch" name="Term" placeholder = "Search Term" value="<?php if(isset($_POST['Term']))echo$_POST['Term'];else echo 'Search Term';?>">
-      <button class="menubutton" type="submit" name="submit" value="Submit"><b>Submit Search</b></button>
+      <input class="menusearch right" name="Term" placeholder = "Search Term" value="<?php if(isset($_POST['Term']))echo$_POST['Term'];else echo 'Search Term';?>">
+      <button class="menubutton right" type="submit" name="submit" value="Submit"><b>Submit Search</b></button>
     </form>
   </div>
 </div></div></div>
