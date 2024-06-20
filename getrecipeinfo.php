@@ -85,18 +85,7 @@ else
 //qualifies the query with sorting method
 if(isset($_POST['SortBy']))
 {
-  if($_POST['SortBy'] == 'Name')
-    $query .= " ORDER BY Name ".$_POST['Dir'];
-  else if($_POST['SortBy'] == 'Course')
-    $query .= " ORDER BY Course ".$_POST['Dir'];
-  else if($_POST['SortBy'] == 'Instrument')
-    $query .= " ORDER BY Instrument ".$_POST['Dir'];
-  else if($_POST['SortBy'] == 'Prep_time')
-    $query .= " ORDER BY Prep_time ".$_POST['Dir'];
-  else if($_POST['SortBy'] == 'Cook_time')
-    $query .= " ORDER BY Cook_time ".$_POST['Dir'];
-  else if($_POST['SortBy'] == 'Score')
-    $query .= " ORDER BY Score ".$_POST['Dir'];
+  $query .= " ORDER BY ".$_POST['SortBy']." ".$_POST['Dir'];
 }
 else
 {
@@ -202,7 +191,9 @@ mysqli_close($dbc);
         <option value="Score" <?php if($_POST['SearchBy'] == 'Score')echo"selected='selected'>";else echo ">";?>Score greater than</option>
         <option value="Ingredient" <?php if($_POST['SearchBy'] == 'Ingredient')echo"selected='selected'>";else echo ">";?>Includes ingredient</option>
       </select>
-      <input class="menusearch right" name="Term" placeholder = "Search Term" value="<?php if(isset($_POST['Term']))echo$_POST['Term'];else echo 'Search Term';?>">
+      <input class="menusearch right" name="Term" placeholder = "Search Term" value="<?php if(isset($_POST['Term']))echo $_POST['Term'];else echo 'Search Term';?>">
+      <?php if(isset($_POST['SortBy']))echo "<input type='hidden' name='SortBy' value='".$_POST['SortBy']."'>";?>
+      <?php if(isset($_POST['Dir']))echo "<input type='hidden' name='Dir' value='".$_POST['Dir']."'>";?>
       <button class="menubutton right" type="submit" name="submit" value="Submit"><b>Submit Search</b></button>
     </form>
   </div>
