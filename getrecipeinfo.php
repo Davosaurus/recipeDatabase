@@ -90,6 +90,7 @@ if(isset($_POST['SortBy']))
 else
 {
   $_POST['SortBy'] = 'Name';
+  $_POST['Dir'] = 'ASC';
 }
 
 $response = @mysqli_query($dbc, $query);
@@ -97,50 +98,45 @@ $response = @mysqli_query($dbc, $query);
 // If the query executed properly proceed
 if($response)
 {
-  if(!isset($_POST['Dir']))
-    $_POST['Dir'] = 'ASC';
+  echo '<table cellspacing="5" cellpadding="8"><tr class="header">';
+  
+  $column_names = array(
+    "Name" => "Recipe Name",
+    "Course" => "Dish Type",
+    "Instrument" => "Cooking Instrument",
+    "Prep_time" => "Prep Time",
+    "Cook_time" => "Cook Time",
+    "Score" => "Review Score"
+  );
+  
   if($_POST['Dir'] == 'ASC')
   {
-    echo '<table cellspacing="5" cellpadding="8"><tr class="header"><th align="left"';
-    if($_POST['SortBy'] == 'Name') echo ' style="text-decoration:underline"';
-    echo '><b>Recipe Name<form style="display:inline" action="getrecipeinfo.php" method="post"><input type="hidden" name="SortBy" value="Name"><input type="hidden" name="SearchBy" value="'.$_POST['SearchBy'].'"><input type="hidden" name="Term" value="'.$_POST['Term'].'"><button class="inlinebutton" type="submit" name="Dir" value="DESC">▲</button></form></b></th>';
-    echo '<th align="left"';
-    if($_POST['SortBy'] == 'Course') echo ' style="text-decoration:underline"';
-    echo '><b>Dish Type<form style="display:inline" action="getrecipeinfo.php" method="post"><input type="hidden" name="SortBy" value="Course"><input type="hidden" name="SearchBy" value="'.$_POST['SearchBy'].'"><input type="hidden" name="Term" value="'.$_POST['Term'].'"><button class="inlinebutton" type="submit" name="Dir" value="DESC">▲</button></form></b></th>';
-    echo '<th align="left"';
-    if($_POST['SortBy'] == 'Instrument') echo ' style="text-decoration:underline"';
-    echo '><b>Cooking Instrument<form style="display:inline" action="getrecipeinfo.php" method="post"><input type="hidden" name="SortBy" value="Instrument"><input type="hidden" name="SearchBy" value="'.$_POST['SearchBy'].'"><input type="hidden" name="Term" value="'.$_POST['Term'].'"><button class="inlinebutton" type="submit" name="Dir" value="DESC">▲</button></form></b></th>';
-    echo '<th align="left"';
-    if($_POST['SortBy'] == 'Prep_time') echo ' style="text-decoration:underline"';
-    echo '><b>Prep Time<form style="display:inline" action="getrecipeinfo.php" method="post"><input type="hidden" name="SortBy" value="Prep_time"><input type="hidden" name="SearchBy" value="'.$_POST['SearchBy'].'"><input type="hidden" name="Term" value="'.$_POST['Term'].'"><button class="inlinebutton" type="submit" name="Dir" value="DESC">▲</button></form></b></th>';
-    echo '<th align="left"';
-    if($_POST['SortBy'] == 'Cook_time') echo ' style="text-decoration:underline"';
-    echo '><b>Cook Time<form style="display:inline" action="getrecipeinfo.php" method="post"><input type="hidden" name="SortBy" value="Cook_time"><input type="hidden" name="SearchBy" value="'.$_POST['SearchBy'].'"><input type="hidden" name="Term" value="'.$_POST['Term'].'"><button class="inlinebutton" type="submit" name="Dir" value="DESC">▲</button></form></b></th>';
-    echo '<th align="left"';
-    if($_POST['SortBy'] == 'Score') echo ' style="text-decoration:underline"';
-    echo '><b>Review Score<form style="display:inline" action="getrecipeinfo.php" method="post"><input type="hidden" name="SortBy" value="Score"><input type="hidden" name="SearchBy" value="'.$_POST['SearchBy'].'"><input type="hidden" name="Term" value="'.$_POST['Term'].'"><button class="inlinebutton" type="submit" name="Dir" value="DESC">▲</button></form></b></th>';
+    $sorting_arrow = '▲';
+    $opposite_dir = 'DESC';
   }
-  else
+  else if($_POST['Dir'] == 'DESC')
   {
-    echo '<table align="left" cellspacing="5" cellpadding="8"><tr class="header"><th align="left"';
-    if($_POST['SortBy'] == 'Name') echo ' style="text-decoration:underline"';
-    echo '><b>Recipe Name<form style="display:inline" action="getrecipeinfo.php" method="post"><input type="hidden" name="SortBy" value="Name"><input type="hidden" name="SearchBy" value="'.$_POST['SearchBy'].'"><input type="hidden" name="Term" value="'.$_POST['Term'].'"><button class="inlinebutton" type="submit" name="Dir" value="ASC">▼</button></form></b></th>';
-    echo '<th align="left"';
-    if($_POST['SortBy'] == 'Course') echo ' style="text-decoration:underline"';
-    echo '><b>Dish Type<form style="display:inline" action="getrecipeinfo.php" method="post"><input type="hidden" name="SortBy" value="Course"><input type="hidden" name="SearchBy" value="'.$_POST['SearchBy'].'"><input type="hidden" name="Term" value="'.$_POST['Term'].'"><button class="inlinebutton" type="submit" name="Dir" value="ASC">▼</button></form></b></th>';
-    echo '<th align="left"';
-    if($_POST['SortBy'] == 'Instrument') echo ' style="text-decoration:underline"';
-    echo '><b>Cooking Instrument<form style="display:inline" action="getrecipeinfo.php" method="post"><input type="hidden" name="SortBy" value="Instrument"><input type="hidden" name="SearchBy" value="'.$_POST['SearchBy'].'"><input type="hidden" name="Term" value="'.$_POST['Term'].'"><button class="inlinebutton" type="submit" name="Dir" value="ASC">▼</button></form></b></th>';
-    echo '<th align="left"';
-    if($_POST['SortBy'] == 'Prep_time') echo ' style="text-decoration:underline"';
-    echo '><b>Prep Time<form style="display:inline" action="getrecipeinfo.php" method="post"><input type="hidden" name="SortBy" value="Prep_time"><input type="hidden" name="SearchBy" value="'.$_POST['SearchBy'].'"><input type="hidden" name="Term" value="'.$_POST['Term'].'"><button class="inlinebutton" type="submit" name="Dir" value="ASC">▼</button></form></b></th>';
-    echo '<th align="left"';
-    if($_POST['SortBy'] == 'Cook_time') echo ' style="text-decoration:underline"';
-    echo '><b>Cook Time<form style="display:inline" action="getrecipeinfo.php" method="post"><input type="hidden" name="SortBy" value="Cook_time"><input type="hidden" name="SearchBy" value="'.$_POST['SearchBy'].'"><input type="hidden" name="Term" value="'.$_POST['Term'].'"><button class="inlinebutton" type="submit" name="Dir" value="ASC">▼</button></form></b></th>';
-    echo '<th align="left"';
-    if($_POST['SortBy'] == 'Score') echo ' style="text-decoration:underline"';
-    echo '><b>Review Score<form style="display:inline" action="getrecipeinfo.php" method="post"><input type="hidden" name="SortBy" value="Score"><input type="hidden" name="SearchBy" value="'.$_POST['SearchBy'].'"><input type="hidden" name="Term" value="'.$_POST['Term'].'"><button class="inlinebutton" type="submit" name="Dir" value="ASC">▼</button></form></b></th>';
+    $sorting_arrow = '▼';
+    $opposite_dir = 'ASC';
   }
+  
+  echo '<form style="display:inline" action="getrecipeinfo.php" method="post">';
+  echo '<input type="hidden" name="Dir" value="'.$opposite_dir.'">';
+  echo '<input type="hidden" name="SearchBy" value="'.$_POST['SearchBy'].'">';
+  echo '<input type="hidden" name="Term" value="'.$_POST['Term'].'">';
+  
+  //Print column headers
+  foreach($column_names as $key => $long_name)
+  {
+    echo '<th><button class="inlinebutton" type="submit" name="SortBy" value="'.$key.'">';
+    if($_POST['SortBy'] == $key)
+      echo '<span style="text-decoration:underline">'.$long_name.'</span>'.$sorting_arrow;
+    else
+      echo $long_name;
+    echo '</button></th>';
+  }
+  
+  echo '</form>';
 
   // mysqli_fetch_array will return a row of data from the query
   // until no further data is available
@@ -152,7 +148,8 @@ if($response)
     else
       $realScore = $row['Score'];
     
-    echo "<tr><td align='left'><form action='viewrecipe.php' method='post'>
+    //<td style='font-size:30'>☑☐</td>
+    echo "<tr><td><form action='viewrecipe.php' method='post'>
     <input class='inlinebutton' style='text-decoration:underline;' type='submit' name='Name' value= \"".$row['Name']."\">
     </form></td><td>" . 
     $row['Course'] . '</td><td>' .
@@ -184,12 +181,12 @@ mysqli_close($dbc);
     <h2>Osterman 2019</h2>
     <form style="display:inline" action="getrecipeinfo.php" method="post">
       <select class="menusearch right" name="SearchBy">
-        <option value="Name" <?php if($_POST['SearchBy'] == 'Name')echo"selected='selected'>";else echo ">";?>Recipe name</option>
-        <option value="Course" <?php if($_POST['SearchBy'] == 'Course')echo"selected='selected'>";else echo ">";?>Dish type</option>
-        <option value="Instrument" <?php if($_POST['SearchBy'] == 'Instrument')echo"selected='selected'>";else echo ">";?>Cooking instrument</option>
-        <option value="Time" <?php if($_POST['SearchBy'] == 'Time')echo"selected='selected'>";else echo ">";?>Total time less than</option>
-        <option value="Score" <?php if($_POST['SearchBy'] == 'Score')echo"selected='selected'>";else echo ">";?>Score greater than</option>
-        <option value="Ingredient" <?php if($_POST['SearchBy'] == 'Ingredient')echo"selected='selected'>";else echo ">";?>Includes ingredient</option>
+        <option value="Name" <?php if($_POST['SearchBy'] == 'Name')echo"selected='selected'";?>>Recipe name</option>
+        <option value="Course" <?php if($_POST['SearchBy'] == 'Course')echo"selected='selected'";?>>Dish type</option>
+        <option value="Instrument" <?php if($_POST['SearchBy'] == 'Instrument')echo"selected='selected'";?>>Cooking instrument</option>
+        <option value="Time" <?php if($_POST['SearchBy'] == 'Time')echo"selected='selected'";?>>Total time within...</option>
+        <option value="Score" <?php if($_POST['SearchBy'] == 'Score')echo"selected='selected'";?>>Score at least...</option>
+        <option value="Ingredient" <?php if($_POST['SearchBy'] == 'Ingredient')echo"selected='selected'";?>>Includes ingredient</option>
       </select>
       <input class="menusearch right" name="Term" placeholder = "Search Term" value="<?php if(isset($_POST['Term']))echo $_POST['Term'];else echo 'Search Term';?>">
       <?php if(isset($_POST['SortBy']))echo "<input type='hidden' name='SortBy' value='".$_POST['SortBy']."'>";?>

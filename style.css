@@ -16,6 +16,7 @@ td {
 }
 .header {
   color: #FFA500;
+  text-align: left;
 }
 .container .box { 
   display: table;
