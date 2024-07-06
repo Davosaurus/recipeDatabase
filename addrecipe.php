@@ -91,7 +91,7 @@ return false;
 <input type="number" name="Cook_time" style="width:50" value="" min="0" required/>
 </p>
 
-<table id="addIngredients" align="left" style="padding: 8px 20px 8px 0; margin:0">
+<table id="addIngredients" style="padding: 8px 20px 8px 0; margin:0">
   <tr><td><b>Ingredients:</b></td>
   <td colspan=2><b>Amount:</b></td></tr>
   <tr>
@@ -112,7 +112,7 @@ return false;
 </table>
 <div style="width: 580"><button id="addNewIngredient" class="menubutton" style="text-align:center">➕</button></div>
 
-<table id="addInstructions" align="left" style="padding: 8px 20px 8px 0; margin:0">
+<table id="addInstructions" style="padding: 8px 20px 8px 0; margin:0">
   <tr><td><b>Instructions:</b></td></tr>
   <tr><td><input type="text" name="Instruction_1" size="73" maxlength="500" value="" required/> </td></tr>
 </table>

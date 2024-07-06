@@ -11,8 +11,12 @@ body {
   margin: 0;
   padding: 0;
 }
-td {
-  vertical-align: top;
+td, th {
+  padding: 2 12 0 0;
+  vertical-align: middle;
+}
+form {
+  display:inline;
 }
 .header {
   color: #FFA500;
@@ -101,7 +105,7 @@ td {
   background:none;
   color:inherit;
   font:inherit;
-  text-align:left;
+  text-align:inherit;
   border:none;
   cursor:pointer;
   padding:0;
@@ -126,8 +130,12 @@ body {
   margin: 0;
   padding: 0;
 }
-td {
-  vertical-align: top;
+td, th {
+  padding: 2 12 0 0;
+  vertical-align: middle;
+}
+form {
+  display:inline;
 }
 .container .box { 
   display: table;
@@ -157,7 +165,7 @@ td {
   background:none;
   color:inherit;
   font:inherit;
-  text-align:left;
+  text-align:inherit;
   border:none;
   cursor:pointer;
   padding:0;

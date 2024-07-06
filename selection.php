@@ -91,28 +91,28 @@ $info = @mysqli_query($dbc, $query);
 // If the query executed properly proceed
 if($info)
 {
-  echo '<table><tr><td style="min-width:400px"><h1 class="header">Selected Recipes</h1></td>
+  echo '<table><tr><td style="width:50%"><h1 class="header">Selected Recipes</h1></td>
   <td><h1 class="header">Grocery List</h1></td></tr>';
   
-  echo '<tr><td><table align="left"
-  cellspacing="5" cellpadding="8">
+  echo '<tr><td style="vertical-align:top">
+  <table cellspacing="5" cellpadding="8">
 
   <tr>
-  <td style="padding: 12 12 0 0"></td>
-  <td style="padding: 12 12 0 0"><b>Recipe Name</b></td></tr>';
+  <td></td>
+  <td><b>Recipe Name</b></td></tr>';
 
   $isEmpty = true;
   while($row = mysqli_fetch_array($info))
   {
     echo '<tr>
-      <td style="padding: 2 12 0 0">
-        <form style="display:inline" action="selection.php" method="post">
-          <button type="submit" name="DeleteRname" value="'.$row['Rname'].'"><b>❌</b></button>
+      <td>
+        <form action="selection.php" method="post">
+          <button class=inlinebutton style="font-size:20" type="submit" name="DeleteRname" value="'.$row['Rname'].'"><b>❌</b></button>
         </form>
       </td>
-      <td style="padding: 2 12 0 0">
+      <td>
         <form action="viewrecipe.php" method="post">
-          <input style="background:none; color:inherit; font:inherit; text-align:left; border:none; cursor:pointer; text-decoration:underline; padding:0; word-break:break-word; white-space:normal; max-width: 400px;" type="submit" name="Name" value="'.$row['Rname'].'" />
+          <input class="inlinebutton" style="text-decoration:underline;" type="submit" name="Name" value= "'.$row['Rname'].'">
         </form>
       </td>
     </tr>';
@@ -134,23 +134,23 @@ $info = @mysqli_query($dbc, $query);
 // If the query executed properly proceed
 if($info)
 { 
-  echo '<td id="printMe"><table align="left"
-  cellspacing="5" cellpadding="8">
-  <tr><td style="padding: 2 12 0 0"></td>
-  <td style="padding: 12 12 0 0"><b>Ingredient</b></td>
-  <td style="padding: 12 2 0 0"><b>Amount</b></td></tr>';
+  echo '<td id="printMe" style="vertical-align:top">
+  <table cellspacing="5" cellpadding="8">
+  <tr><td></td>
+  <td><b>Ingredient</b></td>
+  <td><b>Amount</b></td></tr>';
   while($row = mysqli_fetch_array($info))
   {
     if($row['Iname'] != $nullIname)
     {
-      echo '<tr><td style="padding: 2 12 0 0">
-      <form style="display:inline" action="selection.php" method="post">
+      echo '<tr><td>
+      <form action="selection.php" method="post">
         <input type="hidden" name="DeleteRname" value="'.$row['Rname'].'"/>
-        <button type="submit" name="DeleteIname" value="'.$row['Iname'].'"><b>❌</b></button>
+        <button class=inlinebutton style="font-size:20" type="submit" name="DeleteIname" value="'.$row['Iname'].'"><b>❌</b></button>
       </form></td>
-      <td style="padding: 2 12 0 0">'.$row['Iname'].'</td>
-      <td style="padding: 2 2 0 0; text-align: right">'.$row['Amount'].'</td>
-      <td style="padding: 2 12 0 0">'.$row['Unit'].'</td></tr>';
+      <td>'.$row['Iname'].'</td>
+      <td style="text-align: right">'.$row['Amount'].'</td>
+      <td>'.$row['Unit'].'</td></tr>';
     }
   }
   
@@ -178,8 +178,8 @@ mysqli_close($dbc);
   </div>
   <div class="box-cell edges">
     <h2>Osterman 2019</h2>
-    <form style="display:inline" action="#" method="post"><button class="menubutton right" onclick="return printDiv()" name="Print" value="foo"><b>Print List</b></button></form>
-    <form style="display:inline" action="selection.php" method="post" onsubmit="return confirm('Are you sure? This will de-select all recipes!');"><button class="menubutton right" type="submit" name="DeleteAll" value="DeleteAll"><b>Remove All</b></button></form>
+    <form action="#" method="post"><button class="menubutton right" onclick="return printDiv()" name="Print" value="foo"><b>Print List</b></button></form>
+    <form action="selection.php" method="post" onsubmit="return confirm('Are you sure? This will de-select all recipes!');"><button class="menubutton right" type="submit" name="DeleteAll" value="DeleteAll"><b>Remove All</b></button></form>
   </div>
 
 </div></div></div>
