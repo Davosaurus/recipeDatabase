@@ -21,6 +21,8 @@ function printDiv() {
   <div class="box-cell center">
 
 <?php
+$nullIname = "__NULL__";
+
 // Get a connection for the database
 require_once('mysqli_connect.php');
 
@@ -33,29 +35,53 @@ if(isset($_POST['DeleteAll']))
     echo mysqli_error($dbc);
   }
 }
-if(isset($_POST['DeleteIname']))
+else if(isset($_POST['DeleteIname']))
 {
   $query = "DELETE FROM Selection
             WHERE Rname = \"".$dbc->escape_string($_POST['DeleteRname'])."\"
             AND Iname = \"".$dbc->escape_string($_POST['DeleteIname'])."\";";
-  if(!@mysqli_query($dbc, $query))
+  if(@mysqli_query($dbc, $query))
+  {
+    //If the last ingredient in the recipe was removed, add a placeholder
+    $query = "SELECT DISTINCT Rname
+              FROM Selection
+              WHERE Rname = \"".$dbc->escape_string($_POST['DeleteRname'])."\";";
+    $info = @mysqli_query($dbc, $query);
+    if(mysqli_num_rows($info) == 0)
+    {
+      $query = "INSERT INTO Selection (Rname, Iname) VALUES (?, ?)";
+      
+      $stmt = mysqli_prepare($dbc, $query);
+      mysqli_stmt_bind_param($stmt, "ss", $_POST['DeleteRname'], $nullIname);
+      mysqli_stmt_execute($stmt);
+      
+      $affected_rows = mysqli_stmt_affected_rows($stmt);
+      if($affected_rows == 1)
+      {
+        mysqli_stmt_close($stmt);
+      }
+      else
+      {
+        echo 'Error occured!';
+        echo mysqli_error($dbc);
+      }
+    }
+  }
+  else
   {
     echo "Couldn't delete database entries<br />";
     echo mysqli_error($dbc);
   }
 }
-else
+else if(isset($_POST['DeleteRname']))
 {
-	if(isset($_POST['DeleteRname']))
-	{
-	  $query = "DELETE FROM Selection
-				WHERE Rname = \"".$dbc->escape_string($_POST['DeleteRname'])."\";";
-	  if(!@mysqli_query($dbc, $query))
-	  {
-		echo "Couldn't delete database entries<br />";
-		echo mysqli_error($dbc);
-	  }
-	}
+  $query = "DELETE FROM Selection
+      WHERE Rname = \"".$dbc->escape_string($_POST['DeleteRname'])."\";";
+  if(!@mysqli_query($dbc, $query))
+  {
+  echo "Couldn't delete database entries<br />";
+  echo mysqli_error($dbc);
+  }
 }
 
 $query = "SELECT DISTINCT Rname
@@ -71,19 +97,25 @@ if($info)
   echo '<tr><td><table align="left"
   cellspacing="5" cellpadding="8">
 
-  <tr><td colspan="2"><b>Recipe Name</b></td></tr>';
+  <tr>
+  <td style="padding: 12 12 0 0"></td>
+  <td style="padding: 12 12 0 0"><b>Recipe Name</b></td></tr>';
 
   $isEmpty = true;
   while($row = mysqli_fetch_array($info))
   {
     echo '<tr>
-	<td style="padding: 2 12 0 0">
-    <form style="display:inline" action="selection.php" method="post">
-      <button type="submit" name="DeleteRname" value="'.$row['Rname'].'"><b>❌</b></button>
-    </form></td>
-	<td style="padding: 2 12 0 0"><form action="viewrecipe.php" method="post">
-    <input style="background:none; color:inherit; font:inherit; text-align:left; border:none; cursor:pointer; text-decoration:underline; padding:0; word-break:break-word; white-space:normal; max-width: 400px;" type="submit" name="Name" value="'.$row['Rname'].'" />
-    </form></td></tr>';
+      <td style="padding: 2 12 0 0">
+        <form style="display:inline" action="selection.php" method="post">
+          <button type="submit" name="DeleteRname" value="'.$row['Rname'].'"><b>❌</b></button>
+        </form>
+      </td>
+      <td style="padding: 2 12 0 0">
+        <form action="viewrecipe.php" method="post">
+          <input style="background:none; color:inherit; font:inherit; text-align:left; border:none; cursor:pointer; text-decoration:underline; padding:0; word-break:break-word; white-space:normal; max-width: 400px;" type="submit" name="Name" value="'.$row['Rname'].'" />
+        </form>
+      </td>
+    </tr>';
     $isEmpty = false;
   }
   echo '</table></td>';
@@ -109,14 +141,17 @@ if($info)
   <td style="padding: 12 2 0 0"><b>Amount</b></td></tr>';
   while($row = mysqli_fetch_array($info))
   {
-    echo '<tr><td style="padding: 2 12 0 0">
-    <form style="display:inline" action="selection.php" method="post">
-      <input type="hidden" name="DeleteRname" value="'.$row['Rname'].'"/>
-      <button type="submit" name="DeleteIname" value="'.$row['Iname'].'"><b>❌</b></button>
-    </form></td>
-    <td style="padding: 2 12 0 0">'.$row['Iname'].'</td>
-    <td style="padding: 2 2 0 0; text-align: right">'.$row['Amount'].'</td>
-    <td style="padding: 2 12 0 0">'.$row['Unit'].'</td></tr>';
+    if($row['Iname'] != $nullIname)
+    {
+      echo '<tr><td style="padding: 2 12 0 0">
+      <form style="display:inline" action="selection.php" method="post">
+        <input type="hidden" name="DeleteRname" value="'.$row['Rname'].'"/>
+        <button type="submit" name="DeleteIname" value="'.$row['Iname'].'"><b>❌</b></button>
+      </form></td>
+      <td style="padding: 2 12 0 0">'.$row['Iname'].'</td>
+      <td style="padding: 2 2 0 0; text-align: right">'.$row['Amount'].'</td>
+      <td style="padding: 2 12 0 0">'.$row['Unit'].'</td></tr>';
+    }
   }
   
   echo '</table></td></tr></table>';
