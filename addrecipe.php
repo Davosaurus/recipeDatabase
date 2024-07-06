@@ -9,7 +9,7 @@ var addDiv = $('#addIngredients');
 var i = $('#addIngredients tr').size();
 
 $('#addNewIngredient').live('click', function() {
-$('<tr><td><input type="text" id="p_new" size="30" maxlength="250" name="Ingredient_' + i +'" value="" required/></td><td><input type="number" id="p_new" size="5" name="Amount_' + i +'" value="" min="0" step="any" required/></td><td><select id="p_new" name="Unit_' + i +'" value="" required> <option disabled selected value="">Choose unit...</option> <option>Teaspoons</option> <option>Tablespoons</option> <option>Fluid Ounces</option> <option>Cups</option> <option>Pints</option> <option>Quarts</option> <option>Gallons</option> <option>Ounces</option> <option>Pounds</option> <option>Cans</option> <option>Units/Packages</option> </select></td>   </tr>').appendTo(addDiv);
+$('<tr><td><input type="text" id="p_new" size="45" maxlength="250" name="Ingredient_' + i +'" value="" required/></td><td><input type="number" id="p_new" style="width:50" name="Amount_' + i +'" value="" min="0" step="any" required/></td><td><select id="p_new" name="Unit_' + i +'" value="" required> <option disabled selected value="">Choose unit...</option> <option>Teaspoons</option> <option>Tablespoons</option> <option>Fluid Ounces</option> <option>Cups</option> <option>Pints</option> <option>Quarts</option> <option>Gallons</option> <option>Ounces</option> <option>Pounds</option> <option>Cans</option> <option>Units/Packages</option> </select></td>   </tr>').appendTo(addDiv);
 i++;
 
 //<td><a href="#" id="remNewIngredient">Remove</a></td>
@@ -84,17 +84,31 @@ return false;
 </p>
 
 <p><b>Prep. Time (minutes):</b><br>
-<input type="number" name="Prep_time" size="30" value="" min="0" required/>
+<input type="number" name="Prep_time" style="width:50" value="" min="0" required/>
 </p>
 
 <p><b>Cook Time (minutes):</b><br>
-<input type="number" name="Cook_time" size="30" value="" min="0" required/>
+<input type="number" name="Cook_time" style="width:50" value="" min="0" required/>
 </p>
 
 <table id="addIngredients" align="left" style="padding: 8px 20px 8px 0; margin:0">
   <tr><td><b>Ingredients:</b></td>
-  <td><b>Amount:</b></td></tr>
-  <tr><td><input type="text" name="Ingredient_1" size="30" maxlength="250" value="" required/> </td><td> <input type="number" name="Amount_1" size="5" value="" min="0" step="any" required/> </td><td> <select name="Unit_1" value="" required> <option disabled selected value="">Choose unit...</option> <option>Teaspoons</option> <option>Tablespoons</option> <option>Fluid Ounces</option> <option>Cups</option> <option>Pints</option> <option>Quarts</option> <option>Gallons</option> <option>Ounces</option> <option>Pounds</option> <option>Cans</option> <option>Units/Packages</option> </select> </td></tr>
+  <td colspan=2><b>Amount:</b></td></tr>
+  <tr>
+    <td><input type="text" name="Ingredient_1" size="45" maxlength="250" value="" required/> </td>
+    <td> <input type="number" name="Amount_1" style="width:50" value="" min="0" step="any" required/> </td>
+    <td>
+      <select name="Unit_1" value="" required>
+        <option disabled selected value="">Choose unit...</option>
+        <option>Teaspoons</option> <option>Tablespoons</option>
+        <option>Fluid Ounces</option> <option>Cups</option>
+        <option>Pints</option> <option>Quarts</option>
+        <option>Gallons</option> <option>Ounces</option>
+        <option>Pounds</option> <option>Cans</option>
+        <option>Units/Packages</option>
+      </select>
+    </td>
+  </tr>
 </table>
 <div style="width: 580"><button id="addNewIngredient" class="menubutton" style="text-align:center">➕</button></div>
 
