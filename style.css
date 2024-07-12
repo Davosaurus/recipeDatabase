@@ -49,7 +49,7 @@ form {
   border: none;
   padding: 0;
 }
-.container .box .box-cell.center { 
+.container .box .box-cell.center {
   position: relative;
   width: 70%;
   max-width: 70%;
@@ -63,43 +63,18 @@ form {
   width: 90%;
   text-align: left;
   font-size: 16px;
+  font-weight: bold;
   padding: 5px;
   transition-duration: 0.3s;
 }
 .menubutton:hover {
-  display: block;
   height: 54px;
-  background-color: #FFB550; /*#C2C0C1;*/
   width: 95%;
-  text-align: left;
-  font-size: 16px;
-  padding: 5px;
 }
 .menubutton.right, .menusearch.right {
-  display: block;
   position:relative;
   float:right;
   margin-right:20px;
-  height: 50px;
-  border: 2px solid #000000;
-  background-color: #FFA500; /*#828081;*/
-  width: 90%;
-  text-align: left;
-  font-size: 16px;
-  padding: 5px;
-  transition-duration: 0.3s;
-}
-.menubutton.right:hover {
-  display: block;
-  position:relative;
-  float:right;
-  margin-right:20px;
-  height: 54px;
-  background-color: #FFB550; /*#C2C0C1;*/
-  width: 95%;
-  text-align: left;
-  font-size: 16px;
-  padding: 5px;
 }
 .inlinebutton {
   background:none;
@@ -112,6 +87,11 @@ form {
   word-break:break-word;
   white-space:normal;
   max-width: 400px;
+}
+.iconbutton {
+  font-size: 20;
+  outline: 2px solid #2B2B32;
+  border-radius: 3px;
 }
 .icon {
   display: inline-block;
@@ -136,6 +116,9 @@ td, th {
 }
 form {
   display:inline;
+}
+.header {
+  text-align: left;
 }
 .container .box { 
   display: table;
@@ -172,6 +155,9 @@ form {
   word-break:break-word;
   white-space:normal;
   max-width: 400px;
+}
+.iconbutton {
+  display:none !important;
 }
 
 }
