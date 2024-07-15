@@ -63,7 +63,7 @@ form {
 }
 .menubutton:hover {
   height: 54px;
-  width: 104%;
+  width: calc(100% + 8px);
   background-color: #FFE580;
 }
 .inlinebutton {
@@ -116,7 +116,8 @@ form {
 .center {
   position: absolute;
   width: 100%;
-  padding: 10px;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 .inlinebutton {
   background:none;

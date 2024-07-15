@@ -112,13 +112,13 @@ return false;
     </td>
   </tr>
 </table>
-<div style="width: 530"><button id="addNewIngredient" class="menubutton" style="text-align:center">➕</button></div>
+<div style="width: 543"><button id="addNewIngredient" class="menubutton" style="text-align:center">➕</button></div>
 
 <table id="addInstructions" style="padding: 8px 20px 8px 0; margin:0">
   <tr><td><b>Instructions:</b></td></tr>
   <tr><td><input type="text" name="Instruction_1" size="73" maxlength="500" value="" required/> </td></tr>
 </table>
-<div style="width: 530"><button id="addNewInstruction" class="menubutton" style="text-align:center">➕</button></div>
+<div style="width: 543"><button id="addNewInstruction" class="menubutton" style="text-align:center">➕</button></div>
 
   </div>
 </form>
