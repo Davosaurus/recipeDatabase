@@ -41,7 +41,7 @@ $info = @mysqli_query($dbc, $query);
 // If the query executed properly proceed
 if($info)
 {
-  echo '<table style="table-layout:fixed; width:100%;"><tr><th style="width: 40%"><h1 class="header">Selected Recipes</h1></th>
+  echo '<table style="table-layout:fixed; width:100%;"><tr><th style="width: 30%"><h1 class="header">Selected Recipes</h1></th>
   <th><h1 class="header">Grocery List</h1></th></tr>';
   
   echo '<tr><td style="vertical-align:top">
