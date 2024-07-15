@@ -63,11 +63,13 @@ return false;
 
 <body>
 
-<div class="container"><div class="box"><div class="box-row">
-  <iframe class="iframe box-cell edges" src="sidebar.php"></iframe>
-  <div class="box-cell center">
-
 <form action="recipeadded.php" method="post">
+
+<iframe class="menubox main" src="sidebar.php"></iframe>
+<div class="sidebar menubox context">
+  <button class='menubutton' type='submit' name='submit' value='Submit'>Submit Recipe</button>
+</div>
+<div class="center">
 
 <h1 class="header">Add a New Recipe</h1>
 
@@ -110,20 +112,15 @@ return false;
     </td>
   </tr>
 </table>
-<div style="width: 580"><button id="addNewIngredient" class="menubutton" style="text-align:center">➕</button></div>
+<div style="width: 530"><button id="addNewIngredient" class="menubutton" style="text-align:center">➕</button></div>
 
 <table id="addInstructions" style="padding: 8px 20px 8px 0; margin:0">
   <tr><td><b>Instructions:</b></td></tr>
   <tr><td><input type="text" name="Instruction_1" size="73" maxlength="500" value="" required/> </td></tr>
 </table>
-<div style="width: 580"><button id="addNewInstruction" class="menubutton" style="text-align:center">➕</button></div>
+<div style="width: 530"><button id="addNewInstruction" class="menubutton" style="text-align:center">➕</button></div>
 
   </div>
-  <div class="box-cell edges">
-    <h2>Osterman 2019</h2>
-  <button class='menubutton right' type='submit' name='submit' value='Submit'><b>Submit Recipe</b></button>
-  </div>
 </form>
-</div></div></div>
 
 </body>

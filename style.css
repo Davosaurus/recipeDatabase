@@ -22,45 +22,39 @@ form {
   color: #FFA500;
   text-align: left;
 }
-.container .box { 
-  display: table;
-  height: 100%;
-  width: 100%;
-}
-.container .box .box-row { 
-  display: table-row;
-  height: 100%;
-}
-.container .box .box-cell { 
-  display: table-cell;
-  padding: 10px;
-}
-.container .box .box-cell.edges {
-  position: fixed;
-  width: 15%;
-  height: 100%;
+.sidebar {
   background: #528052;
   color: #000000;
-  vertical-align: top;
-  padding-bottom: 80px;
+  padding: 10px;
 }
-.iframe.box-cell.edges {
-  margin: 0;
+.menubox {
+  position: fixed;
+  width: 15%;
   border: none;
-  padding: 0;
+  box-sizing: border-box;
 }
-.container .box .box-cell.center {
-  position: relative;
-  width: 70%;
-  max-width: 70%;
-  padding-bottom: 80px;
+.menubox.main {
+  height: 100%;
+}
+.menubox.context {
+  border-top: 5px solid #427042;
+  top: 50%;
+  bottom: 50px;
+  padding-top: 30px;
+}
+.center {
+  position: absolute;
+  left: 15%;
+  width: 85%;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 .menubutton, .menusearch {
   display: block;
   height: 50px;
   border: 2px solid #000000;
   background-color: #FFA500; /*#828081;*/
-  width: 90%;
+  width: 100%;
   text-align: left;
   font-size: 16px;
   font-weight: bold;
@@ -69,12 +63,8 @@ form {
 }
 .menubutton:hover {
   height: 54px;
-  width: 95%;
-}
-.menubutton.right, .menusearch.right {
-  position:relative;
-  float:right;
-  margin-right:20px;
+  width: 104%;
+  background-color: #FFE580;
 }
 .inlinebutton {
   background:none;
@@ -120,29 +110,13 @@ form {
 .header {
   text-align: left;
 }
-.container .box { 
-  display: table;
-  height: 100%;
+.menubox {
+  display:none !important;
+}
+.center {
+  position: absolute;
   width: 100%;
-}
-.container .box .box-row { 
-  display: table-row;
-  height: 100%;
-}
-.container .box .box-cell { 
-  display: table-cell;
   padding: 10px;
-}
-.container .box .box-cell.edges {
-  display: none !important;
-  width: 15%;
-  vertical-align: top;
-  padding-bottom: 80px;
-}
-.container .box .box-cell.center { 
-  width: 70%;
-  max-width: 70%;
-  padding-bottom: 80px;
 }
 .inlinebutton {
   background:none;

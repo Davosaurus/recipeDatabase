@@ -5,26 +5,8 @@
 
 <body>
 
-<div class="container"><div class="box"><div class="box-row">
-  <iframe class="iframe box-cell edges" src="sidebar.php"></iframe>
-  <div class="box-cell center">
-
-<?php 
-/*
-echo '<table>';
-    foreach ($_POST as $key => $value) {
-        echo "<tr>";
-        echo "<td>";
-        echo $key;
-        echo "</td>";
-        echo "<td>";
-        echo $value;
-        echo "</td>";
-        echo "</tr>";
-    }
-echo '</table>';
-*/
-?>
+<iframe class="menubox main" src="sidebar.php"></iframe>
+<div class="center">
 
 <?php
 
@@ -170,9 +152,5 @@ if(isset($_POST['submit']))
 ?>
 
   </div>
-  <div class="box-cell edges">
-    <h2>Osterman 2019</h2>
-  </div>
-</div></div></div>
 
 </body>

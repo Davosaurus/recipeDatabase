@@ -2,88 +2,38 @@
 <title>Grocery List</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 
-<script>
-function printDiv() {
-  var divToPrint=document.getElementById('printMe');
-  var newWin=window.open('','Print-Window');
-  newWin.document.open();
-  newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
-  newWin.document.close();
-  setTimeout(function(){newWin.close();},10);
-}
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="selectaction.js"></script>
 </head>
 
-<body>
-
-<div class="container"><div class="box"><div class="box-row">
-  <iframe class="iframe box-cell edges" src="sidebar.php"></iframe>
-  <div class="box-cell center">
+<body id=selectButtonContainer>
 
 <?php
-$nullIname = "__NULL__";
+include("global.php");
+global $placeholderInameInvisible;
+global $allRname;
 
 // Get a connection for the database
 require_once('mysqli_connect.php');
+?>
 
-if(isset($_POST['DeleteAll']))
-{
-  $query = "DELETE FROM Selection";
-  if(!@mysqli_query($dbc, $query))
-  {
-    echo "Couldn't delete database entries<br />";
-    echo mysqli_error($dbc);
-  }
-}
-else if(isset($_POST['DeleteIname']))
-{
-  $query = "DELETE FROM Selection
-            WHERE Rname = \"".$dbc->escape_string($_POST['DeleteRname'])."\"
-            AND Iname = \"".$dbc->escape_string($_POST['DeleteIname'])."\";";
-  if(@mysqli_query($dbc, $query))
-  {
-    //If the last ingredient in the recipe was removed, add a placeholder
-    $query = "SELECT DISTINCT Rname
-              FROM Selection
-              WHERE Rname = \"".$dbc->escape_string($_POST['DeleteRname'])."\";";
-    $info = @mysqli_query($dbc, $query);
-    if(mysqli_num_rows($info) == 0)
-    {
-      $query = "INSERT INTO Selection (Rname, Iname) VALUES (?, ?)";
-      
-      $stmt = mysqli_prepare($dbc, $query);
-      mysqli_stmt_bind_param($stmt, "ss", $_POST['DeleteRname'], $nullIname);
-      mysqli_stmt_execute($stmt);
-      
-      $affected_rows = mysqli_stmt_affected_rows($stmt);
-      if($affected_rows == 1)
-      {
-        mysqli_stmt_close($stmt);
-      }
-      else
-      {
-        echo 'Error occured!';
-        echo mysqli_error($dbc);
-      }
-    }
-  }
-  else
-  {
-    echo "Couldn't delete database entries<br />";
-    echo mysqli_error($dbc);
-  }
-}
-else if(isset($_POST['DeleteRname']))
-{
-  $query = "DELETE FROM Selection
-      WHERE Rname = \"".$dbc->escape_string($_POST['DeleteRname'])."\";";
-  if(!@mysqli_query($dbc, $query))
-  {
-  echo "Couldn't delete database entries<br />";
-  echo mysqli_error($dbc);
-  }
-}
+<iframe class="menubox main" src="sidebar.php"></iframe>
+<div class="sidebar menubox context">
+  <button
+    class="menubutton"
+    Rname="<?= $allRname ?>"
+    nextSelectMethod=remove
+    selectionCallbackFunction=reloadPage
+    onclick="
+      if(confirm('Are you sure? This will de-select all recipes!'))
+        setSelectionStatus.call(this);
+    ">
+    Remove All
+  </button>
+</div>
+<div class="center">
 
+<?php
 $query = "SELECT DISTINCT Rname
           FROM Selection;";
 $info = @mysqli_query($dbc, $query);
@@ -91,8 +41,8 @@ $info = @mysqli_query($dbc, $query);
 // If the query executed properly proceed
 if($info)
 {
-  echo '<table><tr><td style="width:50%"><h1 class="header">Selected Recipes</h1></td>
-  <td><h1 class="header">Grocery List</h1></td></tr>';
+  echo '<table style="table-layout:fixed; width:100%;"><tr><th style="width: 40%"><h1 class="header">Selected Recipes</h1></th>
+  <th><h1 class="header">Grocery List</h1></th></tr>';
   
   echo '<tr><td style="vertical-align:top">
   <table cellspacing="5" cellpadding="8">
@@ -104,18 +54,26 @@ if($info)
   $isEmpty = true;
   while($row = mysqli_fetch_array($info))
   {
-    echo '<tr>
-      <td>
-        <form action="selection.php" method="post">
-          <button class=inlinebutton style="font-size:20" type="submit" name="DeleteRname" value="'.$row['Rname'].'"><b>❌</b></button>
-        </form>
-      </td>
-      <td>
-        <form action="viewrecipe.php" method="post">
-          <input class="inlinebutton" style="text-decoration:underline;" type="submit" name="Name" value= "'.$row['Rname'].'">
-        </form>
-      </td>
-    </tr>';
+?>
+
+<tr>
+  <td>
+    <button
+      class="inlinebutton iconbutton selectButton"
+      Rname="<?= $row['Rname'] ?>"
+      nextSelectMethod=remove
+      selectionCallbackFunction=reloadPage>
+      ❌
+    </button>
+  </td>
+  <td>
+    <form action="viewrecipe.php" method="post">
+      <input class="inlinebutton" style="text-decoration:underline;" type="submit" name="Name" value= "<?= $row['Rname'] ?>">
+    </form>
+  </td>
+</tr>
+
+<?php
     $isEmpty = false;
   }
   echo '</table></td>';
@@ -141,27 +99,31 @@ if($info)
   <td><b>Amount</b></td></tr>';
   while($row = mysqli_fetch_array($info))
   {
-    if($row['Iname'] != $nullIname)
+    if($row['Iname'] != $placeholderInameInvisible)
     {
-      echo '<tr><td>
-      <form action="selection.php" method="post">
-        <input type="hidden" name="DeleteRname" value="'.$row['Rname'].'"/>
-        <button class=inlinebutton style="font-size:20" type="submit" name="DeleteIname" value="'.$row['Iname'].'"><b>❌</b></button>
-      </form></td>
-      <td>'.$row['Iname'].'</td>
-      <td style="text-align: right">'.$row['Amount'].'</td>
-      <td>'.$row['Unit'].'</td></tr>';
+?>
+
+<tr>
+  <td>
+    <button
+      class="inlinebutton iconbutton selectButton"
+      Rname="<?= $row['Rname'] ?>"
+      Iname="<?= $row['Iname'] ?>"
+      nextSelectMethod=remove
+      selectionCallbackFunction=deleteCallingElement>
+      ❌
+    </button>
+  </td>
+  <td><?= $row['Iname'] ?></td>
+  <td style="text-align: right"><?= $row['Amount'] ?></td>
+  <td><?= $row['Unit'] ?></td>
+</tr>
+
+<?php
     }
   }
   
   echo '</table></td></tr></table>';
-  
-  
-  
-  
-  
-  
-  
   
   if($isEmpty)
     echo '<tr><td>No recipes selected!</td></tr>';
@@ -174,14 +136,7 @@ else
 // Close connection to the database
 mysqli_close($dbc);
 ?>
-  
-  </div>
-  <div class="box-cell edges">
-    <h2>Osterman 2019</h2>
-    <form action="#" method="post"><button class="menubutton right" onclick="return printDiv()" name="Print" value="foo"><b>Print List</b></button></form>
-    <form action="selection.php" method="post" onsubmit="return confirm('Are you sure? This will de-select all recipes!');"><button class="menubutton right" type="submit" name="DeleteAll" value="DeleteAll"><b>Remove All</b></button></form>
-  </div>
 
-</div></div></div>
+</div>
 
 </body>

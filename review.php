@@ -4,17 +4,17 @@
 </head>
 
 <body>
-
-<div class="container"><div class="box"><div class="box-row">
-  <iframe class="iframe box-cell edges" src="sidebar.php"></iframe>
-  <div class="box-cell center">
-
 <form action="viewrecipe.php" method="post">
 
-<?php
-echo '<h1 class="header">Review '.$_POST['Name'].'</h1>';
+<iframe class="menubox main" src="sidebar.php"></iframe>
+<div class="sidebar menubox context">
+  <button class='menubutton' type='submit' name='Review' value='Submit'>Submit Review</button>
+</div>
+<div class="center">
 
-echo '<p><b>Reviewer:</b><br>
+<h1 class="header">Review <?= $_POST['Name'] ?></h1>
+
+<p><b>Reviewer:</b><br>
 <input type="text" name="Reviewer" style="width:300" value="" placeholder="Your name here"/>
 </p>
 
@@ -26,15 +26,8 @@ echo '<p><b>Reviewer:</b><br>
 <input type="number" name="Cost" style="width:300" value="" placeholder="Integer from 0-10 (10 being best)" min="0" max="10"/>
 </p>
 
-<input type="hidden" name="Name" value="'.$_POST['Name'].'">';
-?>
+<input type="hidden" name="Name" value="<?= $_POST['Name'] ?>">
 
-  </div>
-  <div class="box-cell edges">
-    <h2>Osterman 2019</h2>
-  <button class='menubutton right' type='submit' name='Review' value='Submit'><b>Submit Review</b></button>
-  </div>
+</div>
 </form>
-</div></div></div>
-
 </body>
