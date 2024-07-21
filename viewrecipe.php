@@ -100,27 +100,40 @@ $info = @mysqli_query($dbc, $query);
 if($info)
 {
   $info = mysqli_fetch_array($info);
-  echo '<h1 class="header">'.$info['Name'].'</h1>';
+?>
+
+<h1 class="header"><?= $info['Name'] ?></h1>
   
-  //Table that contains info, ingredients, and instructions
-  echo '<table><tr><td style="width:50%">';
+<!-- Table that contains info (first row), ingredients table (second row), and instructions table (second row, second column) -->
+<table>
+  <tr><!-- First page row -->
+    <td style="width:50%">
 
-  echo '<table><tr><td>';
-  echo $info['Course'].'<br>';
-  echo $info['Instrument'].'<br>';
-  echo '<b>Prep Time: </b>'.$info['Prep_time'].' minutes<br>';
-  echo '<b>Cook Time: </b>'.$info['Cook_time'].' minutes<br>';
+      <table>
+        <tr>
+          <td>
+            <?= $info['Course'] ?><br>
+            <?= $info['Instrument'] ?><br>
+            <b>Prep Time: </b><?= $info['Prep_time'] ?> minutes<br>
+            <b>Cook Time: </b><?= $info['Cook_time'] ?> minutes<br>
 
-  if($score['taste'] != NULL)
-    echo '<b>Taste Score: </b>'.round($score['taste'], 1).'<br>';
+<?php
+            if($score['taste'] != NULL)
+              echo '<b>Taste Score: </b>'.round($score['taste'], 1).'<br>';
 
-  if($score['cost'] != NULL)
-    echo '<b>Cost Efficiency Score: </b>'.round($score['cost'], 1).'<br>';
+            if($score['cost'] != NULL)
+              echo '<b>Cost Efficiency Score: </b>'.round($score['cost'], 1).'<br>';
+?>
 
-  echo '</td></tr></table>';
+          </td>
+        </tr>
+      </table>
   
-  echo '</td></tr>';
-  echo '<tr height=30></tr>';
+    </td>
+  </tr>
+  <tr height=30 /><!-- Spacer row -->
+
+<?php
 }
 else
 {
@@ -131,23 +144,28 @@ else
 // If the query executed properly proceed
 if($ingredients)
 {
-  echo '<tr><td style="vertical-align:top">';
-  
-  echo '<table cellspacing="5" cellpadding="8">
+?>
 
-  <tr><td><b>Ingredient</b></td>
-  <td style="text-align: right"><b>Amount</b></td></tr>';
+  <tr><!-- Second page row -->
+    <td style="vertical-align:top">
 
-  for($i = 0; $i < sizeof($ingredient_list); $i++)
-  {
-    echo '<tr><td>'.$ingredient_list[$i].'</td>
-    <td style="text-align: right">'.$amount_list[$i].'</td>
-    <td>'.$unit_list[$i].'</td>';
-    echo '</tr>';
-  }
-  echo '</table>';
-  
-  echo '</td>';
+      <table cellspacing="5" cellpadding="8">
+        <tr>
+          <td><b>Ingredient</b></td>
+          <td style="text-align: right"><b>Amount</b></td>
+        </tr>
+        <?php for($i = 0; $i < sizeof($ingredient_list); $i++): ?>
+          <tr>
+            <td><?= $ingredient_list[$i] ?></td>
+            <td style="text-align: right"><?= $amount_list[$i] ?></td>
+            <td><?= $unit_list[$i] ?></td>
+          </tr>
+        <?php endfor; ?>
+      </table>
+      
+    </td>
+
+<?php
 }
 else
 {
@@ -164,24 +182,28 @@ $instructions = @mysqli_query($dbc, $query);
 // If the query executed properly proceed
 if($instructions)
 {
-  echo '<td style="vertical-align:top">';
-  
-  echo '<table cellspacing="5" cellpadding="8">
+?>
 
-  <tr><td></td>
-  <td><b>Instructions</b></td></tr>';
+    <td style="vertical-align:top">
+      
+      <table cellspacing="5" cellpadding="8">
+        <tr>
+          <td />
+          <td><b>Instructions</b></td>
+        </tr>
+        <?php while($row = mysqli_fetch_array($instructions)): ?>
+          <tr>
+            <td style="vertical-align:top"><?= $row['Step_num'] ?>)</td>
+            <td><?= $row['Step_instruction'] ?></td>
+          </tr>
+        <?php endwhile; ?>
+      </table>
+      
+    </td>
+  </tr>
+</table>
 
-  // mysqli_fetch_array will return a row of data from the query
-  // until no further data is available
-  while($row = mysqli_fetch_array($instructions))
-  {
-    echo '<tr><td style="vertical-align:top">'.$row['Step_num'].')</td><td>'. 
-    $row['Step_instruction'] . '</td>';
-    echo '</tr>';
-  }
-  echo '</table>';
-  
-  echo '</td></tr>';
+<?php
 }
 else
 {
@@ -192,8 +214,6 @@ else
 // Close connection to the database
 mysqli_close($dbc);
 ?>
-
-</table>
 
 </div>
 

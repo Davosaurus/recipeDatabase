@@ -137,25 +137,32 @@ if($response)
     $sorting_arrow = '▼';
     $opposite_dir = 'ASC';
   }
+?>
+
+<form action="getrecipeinfo.php" method="post">
+<input type="hidden" name="Dir" value="<?= $opposite_dir ?>">
+<input type="hidden" name="SearchBy" value="<?= $_POST['SearchBy'] ?>">
+<input type="hidden" name="Term" value="<?= $_POST['Term'] ?>">
   
-  echo '<form action="getrecipeinfo.php" method="post">';
-  echo '<input type="hidden" name="Dir" value="'.$opposite_dir.'">';
-  echo '<input type="hidden" name="SearchBy" value="'.$_POST['SearchBy'].'">';
-  echo '<input type="hidden" name="Term" value="'.$_POST['Term'].'">';
-  
+<?php
   //Print column headers
   foreach($column_names as $key => $long_name)
   {
-    echo '<th><button class="inlinebutton" type="submit" name="SortBy" value="'.$key.'">';
-    if($_POST['SortBy'] == $key)
-      echo '<span style="text-decoration:underline">'.$long_name.'</span>'.$sorting_arrow;
-    else
-      echo $long_name;
-    echo '</button></th>';
+?>
+    <th><button class="inlinebutton" type="submit" name="SortBy" value="<?= $key ?>">
+    <?php if($_POST['SortBy'] == $key): ?>
+      <span style="text-decoration:underline"><?= $long_name ?></span><?= $sorting_arrow ?>
+    <?php else: ?>
+      <?= $long_name ?>
+    <?php endif; ?>
+    </button></th>
+<?php
   }
+?>
   
-  echo '</form>';
+</form>
 
+<?php
   // mysqli_fetch_array will return a row of data from the query
   // until no further data is available
   $isEmpty = true;
@@ -167,37 +174,42 @@ if($response)
       $realScore = $row['Score'];
 ?>
     
-<tr>
+    <tr>
+      <td>
+        <button
+          class="inlinebutton iconbutton selectButton"
+          style="font-size:30"
+          Rname="<?= $row['Name'] ?>"
+          selectionCallbackFunction=getSelectionStatusAndUpdateElement
+          removeText="☑" addText="☐">
+        </button>
+        <script>
+          //Call getSelectionStatus once for each selectButton to set the initial element text
+          functions["getSelectionStatusAndUpdateElement"].call(document.querySelector("#selectButtonContainer .selectButton[Rname=\"<?= $dbc->escape_string($row['Name']) ?>\"]"));
+        </script>
+      </td>
+      
+      <td>
+        <form action="viewrecipe.php" method="post">
+          <input class="inlinebutton" style="text-decoration:underline;" type="submit" name="Name" value= "<?= $row['Name'] ?>">
+        </form>
+      </td>
+      
+      <td><?= $row['Course'] ?></td>
+      <td><?= $row['Instrument'] ?></td>
+      <td><?= $row['Prep_time'] ?></td>
+      <td><?= $row['Cook_time'] ?></td>
+      <td><?= $realScore ?></td>
+    </tr>
+    
+<?php
+    $isEmpty = false;
+  } // end while loop that iterates over query results
+?>
 
-<td>
-<button
-  class="inlinebutton iconbutton selectButton"
-  style="font-size:30"
-  Rname="<?= $row['Name'] ?>"
-  selectionCallbackFunction=getSelectionStatusAndUpdateElement
-  removeText="☑" addText="☐">
-</button>
-<script>
-  //Call getSelectionStatus once for each selectButton to set the initial element text
-  functions["getSelectionStatusAndUpdateElement"].call(document.querySelector("#selectButtonContainer .selectButton[Rname=\"<?= $dbc->escape_string($row['Name']) ?>\"]"));
-</script>
+</table>
 
 <?php
-    echo '</td>';
-    
-    echo '<td><form action="viewrecipe.php" method="post">
-    <input class="inlinebutton" style="text-decoration:underline;" type="submit" name="Name" value= "'.$row['Name'].'">
-    </form></td><td>' . 
-    $row['Course'] . '</td><td>' .
-    $row['Instrument'] . '</td><td>' . 
-    $row['Prep_time'] . '</td><td>' .
-    $row['Cook_time'] . '</td><td>' . 
-    $realScore . '</td>';
-    echo '</tr>';
-    $isEmpty = false;
-  }
-  echo '</table>';
-  
   if($isEmpty)
     echo '<br><br><br>No results!';
 }
