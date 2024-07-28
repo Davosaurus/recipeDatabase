@@ -163,10 +163,10 @@ if($response)
 </form>
 
 <?php
-  // mysqli_fetch_array will return a row of data from the query
+  // mysqli_fetch_assoc will return a row of data from the query
   // until no further data is available
   $isEmpty = true;
-  while($row = mysqli_fetch_array($response))
+  while($row = mysqli_fetch_assoc($response))
   {
     if($row['Score'] == NULL)
       $realScore = "N.A.";

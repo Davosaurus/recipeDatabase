@@ -65,7 +65,7 @@ if(isset($_POST['Review']))
 
 // Get aggregate review data
 $scoreQuery = "SELECT AVG(Taste) AS 'taste', AVG(Cost) AS 'cost' FROM Review WHERE Rname = \"".$dbc->escape_string($_POST['Name'])."\";";
-$score = mysqli_fetch_array(@mysqli_query($dbc, $scoreQuery));
+$score = mysqli_fetch_assoc(@mysqli_query($dbc, $scoreQuery));
 
 if(isset($_POST['Review']))
 {
@@ -83,7 +83,7 @@ $ingredients = @mysqli_query($dbc, $query);
 
 if($ingredients)
 {
-  while($row = mysqli_fetch_array($ingredients))
+  while($row = mysqli_fetch_assoc($ingredients))
   {
     $ingredient_list[] = $row['Iname'];
     $amount_list[] = $row['Amount'];
@@ -99,7 +99,7 @@ $info = @mysqli_query($dbc, $query);
 // If the query executed properly proceed
 if($info)
 {
-  $info = mysqli_fetch_array($info);
+  $info = mysqli_fetch_assoc($info);
 ?>
 
 <h1 class="header"><?= $info['Name'] ?></h1>
@@ -191,7 +191,7 @@ if($instructions)
           <td />
           <td><b>Instructions</b></td>
         </tr>
-        <?php while($row = mysqli_fetch_array($instructions)): ?>
+        <?php while($row = mysqli_fetch_assoc($instructions)): ?>
           <tr>
             <td style="vertical-align:top"><?= $row['Step_num'] ?>)</td>
             <td><?= $row['Step_instruction'] ?></td>
