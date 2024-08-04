@@ -88,6 +88,37 @@ form {
   width: 25px;
   text-align: center;
 }
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: black;
+  color: #fff;
+  border-radius: 6px;
+  padding: 5px;
+  white-space: nowrap;
+  text-align:right;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 105%;
+  right: 100%;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 0px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
 
 }
 

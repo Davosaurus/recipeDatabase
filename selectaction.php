@@ -74,13 +74,24 @@ function removeFromSelection() {
   global $allRname;
   
   $query = "DELETE FROM Selection";
-  if($_POST['Rname'] != $allRname)
+  
+  if(isset($_POST['Iname']) || (isset($_POST['Rname']) && $_POST['Rname'] != $allRname))
   {
-    $query .= " WHERE Rname = '".$dbc->escape_string($_POST['Rname'])."'";
+    $query .= " WHERE ";
+    
+    if(isset($_POST['Rname']))
+    {
+      $query .= "Rname = '".$dbc->escape_string($_POST['Rname'])."'";
+      if(isset($_POST['Iname']))
+      {
+        $query .= " AND ";
+      }
+    }
     
     if(isset($_POST['Iname']))
     {
-      $query .= " AND Iname = '".$dbc->escape_string($_POST['Iname'])."'";
+      $query .= "Iname = '".$dbc->escape_string($_POST['Iname'])."'";
+      $query .= "AND Unit = '".$dbc->escape_string($_POST['Unit'])."'";
     }
   }
   

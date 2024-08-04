@@ -50,9 +50,12 @@ function setSelectionStatus() {
   
   const formData = new FormData();
   formData.append('method', callingElement.getAttribute("nextSelectMethod"));
-  formData.append('Rname', callingElement.getAttribute("Rname"));
+  if(callingElement.hasAttribute("Rname"))
+	formData.append('Rname', callingElement.getAttribute("Rname"));
   if(callingElement.hasAttribute("Iname"))
     formData.append('Iname', callingElement.getAttribute("Iname"));
+  if(callingElement.hasAttribute("Unit"))
+    formData.append('Unit', callingElement.getAttribute("Unit"));
   
   $.ajax({
     method: 'post',

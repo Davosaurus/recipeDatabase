@@ -45,9 +45,9 @@ $units = array(
     "size" => 1
   ),
   "Units/Packages" => array(
-    "type" => "unit",
+    "type" => "singleton",
     "size" => 1
-  )  
+  )
 );
 
 function clearStoredResults()
@@ -63,21 +63,54 @@ function clearStoredResults()
   } while ($dbc->more_results() && $dbc->next_result());
 }
 
-function combineIngredients($original, $new)
+function combineIngredients($ingredientSet, $newIngredient)
 {
-  if($original == null)
+  global $units;
+  global $placeholderInameInvisible;
+  
+  $newUnit = $units[$newIngredient["Unit"]];
+  
+  if($ingredientSet == $placeholderInameInvisible)
   {
-    return $new;
+    $ingredientSet = array($newUnit["type"] => $newIngredient);
+    $ingredientSet[$newUnit["type"]]["Rname"] = array($newIngredient["Rname"]);
+    return $ingredientSet;
+  }
+  
+  //If new ingredient type is already present in the map
+  if(isset($ingredientSet[$newUnit["type"]]))
+  {
+    $originalUnit = $units[$ingredientSet[$newUnit["type"]]["Unit"]];
+
+    //Convert amount to the bigger of the two units
+    if($newUnit["size"] < $originalUnit["size"])
+    {
+      //Set amount
+      //            combined amount              =         new amount       + (              original amount              *          ratio between units            )
+      $ingredientSet[$newUnit["type"]]["Amount"] = $newIngredient["Amount"] + ($ingredientSet[$newUnit["type"]]["Amount"] * $newUnit["size"] / $originalUnit["size"]);
+
+      //Set unit
+      $ingredientSet[$newUnit["type"]]["Unit"] = $newIngredient["Unit"];
+    }
+    else
+    {
+      //Set amount
+      //            combined amount              =              original amount               + (         new amount      *          ratio between units            )
+      $ingredientSet[$newUnit["type"]]["Amount"] = $ingredientSet[$newUnit["type"]]["Amount"] + ($newIngredient["Amount"] * $originalUnit["size"] / $newUnit["size"]);
+
+      //Leave unit as original
+    }
+    
+    //Set Rname
+    $ingredientSet[$newUnit["type"]]["Rname"][] = $newIngredient["Rname"];
+  }
+  else
+  {
+    $ingredientSet[$newUnit["type"]] = $newIngredient;
+    $ingredientSet[$newUnit["type"]]["Rname"] = array($newIngredient["Rname"]);
   }
 
-  //Are the two units compatible?
-  //Find the bigger unit between the two
-  //Convert the other amount into the bigger unit
-  //Add the two, set the result along with the new unit
-  
-  $original['Rname'] .= ', '.$new['Rname'];
-
-  return $original;
+  return $ingredientSet;
 }
 
 ?>
