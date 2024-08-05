@@ -2,7 +2,7 @@
 @media screen
 {
 
-html {
+html, input, select {
   background: #2E2E35;
   color: #DDDDDD;
   font-family: verdana, helvetica, sans-serif;
@@ -17,6 +17,10 @@ td, th {
 }
 form {
   display:inline;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
 .header {
   color: #FFA500;
@@ -54,6 +58,7 @@ form {
   height: 50px;
   border: 2px solid #000000;
   background-color: #FFA500; /*#828081;*/
+  color: black;
   width: 100%;
   text-align: left;
   font-size: 16px;

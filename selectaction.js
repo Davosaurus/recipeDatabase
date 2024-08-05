@@ -1,6 +1,11 @@
 
 $(document).ready(function() {
   $("#selectButtonContainer").on('click', ".selectButton", setSelectionStatus);
+  $("#selectButtonContainer").on('focusout', ".multiplierField", setSelectionStatus);
+  $("#selectButtonContainer").on('keydown', ".multiplierField", function(e){
+    if(e.which == 13)
+      this.blur();
+  });
 });
 
 functions = {
@@ -56,6 +61,8 @@ function setSelectionStatus() {
     formData.append('Iname', callingElement.getAttribute("Iname"));
   if(callingElement.hasAttribute("Unit"))
     formData.append('Unit', callingElement.getAttribute("Unit"));
+  if(callingElement.hasAttribute("value"))
+    formData.append('Multiplier', callingElement.value);
   
   $.ajax({
     method: 'post',

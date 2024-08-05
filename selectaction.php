@@ -14,6 +14,9 @@ else if($_POST['method'] == 'add') {
 else if($_POST['method'] == 'remove') {
   removeFromSelection();
 }
+else if($_POST['method'] == 'multiply') {
+  setMultiplier();
+}
 
 
 
@@ -57,7 +60,7 @@ function addToSelection() {
   }
   
   //Add an invisible placeholder ingredient, so that when all normal ingredients are removed the recipe remains
-  $query = "INSERT INTO Selection (Rname, Iname) VALUES ('".$dbc->escape_string($_POST['Rname'])."', '".$placeholderInameInvisible."')";
+  $query = "INSERT INTO Selection (Rname, Iname, Amount) VALUES ('".$dbc->escape_string($_POST['Rname'])."', '".$placeholderInameInvisible."', 1)";
   
   if(!@mysqli_query($dbc, $query))
   {
@@ -98,6 +101,29 @@ function removeFromSelection() {
   if(!@mysqli_query($dbc, $query))
   {
     echo "Could not delete database entries.\n";
+    echo mysqli_error($dbc);
+  }
+  
+  header('Content-Type: application/json');
+  die(json_encode(true));
+}
+
+function setMultiplier() {
+  global $dbc;
+  global $placeholderInameInvisible;
+  
+  $query = "REPLACE INTO Selection (Rname, Iname, Amount, Unit)
+            SELECT Rname, Iname, Amount*".$dbc->escape_string($_POST['Multiplier']).", Unit FROM Ingredient
+            WHERE Rname = '".$dbc->escape_string($_POST['Rname'])."'
+            UNION SELECT
+            '".$dbc->escape_string($_POST['Rname'])."',
+            '".$placeholderInameInvisible."',
+            ".$dbc->escape_string($_POST['Multiplier']).",
+            'Ounces'";
+  
+  if(!@mysqli_query($dbc, $query))
+  {
+    echo "Could not update database entries.\n";
     echo mysqli_error($dbc);
   }
   

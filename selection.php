@@ -56,8 +56,9 @@ require_once('mysqli_connect.php');
 <div class="center" style="padding-right:100px">
 
 <?php
-$query = "SELECT DISTINCT Rname
-          FROM Selection;";
+$query = "SELECT Rname, Amount
+          FROM Selection
+          WHERE Iname = '".$placeholderInameInvisible."'";
 $info = @mysqli_query($dbc, $query);
 
 // If the query executed properly proceed
@@ -95,6 +96,19 @@ if($info)
             <form action="viewrecipe.php" method="post">
               <input class="inlinebutton" style="text-decoration:underline;" type="submit" name="Name" value= "<?= $row['Rname'] ?>">
             </form>
+          </td>
+          <td>
+            x
+            <input
+              class=multiplierField
+              type="number"
+              step="0.01"
+              min="0"
+              style="width:40"
+              value=<?= $row['Amount'] ?>
+              Rname="<?= $row['Rname'] ?>"
+              nextSelectMethod=multiply
+              selectionCallbackFunction=reloadPage>
           </td>
         </tr>
 
