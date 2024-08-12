@@ -63,6 +63,55 @@ function clearStoredResults()
   } while ($dbc->more_results() && $dbc->next_result());
 }
 
+function deleteBaseRecipe($Rname)
+{
+  global $dbc;
+  
+  $escapedString = $dbc->escape_string($Rname);
+  $query = "DELETE FROM Recipe
+            WHERE Name = '".$escapedString."';
+            DELETE FROM Ingredient
+            WHERE Rname = '".$escapedString."';
+            DELETE FROM Instruction
+            WHERE Rname = '".$escapedString."';
+            ";
+  if(!@mysqli_multi_query($dbc, $query))
+  {
+    echo "<script>alert('Couldn't delete database entries\n".mysqli_error($dbc)."');</script>";
+  }
+  clearStoredResults();
+}
+
+function deleteRecipeSelection($Rname)
+{
+  global $dbc;
+  
+  $escapedString = $dbc->escape_string($Rname);
+  $query = "DELETE FROM Selection
+            WHERE Rname = '".$escapedString."';
+            ";
+  if(!@mysqli_multi_query($dbc, $query))
+  {
+    echo "<script>alert('Couldn't delete database entries\n".mysqli_error($dbc)."');</script>";
+  }
+  clearStoredResults();
+}
+
+function deleteRecipeReviews($Rname)
+{
+  global $dbc;
+  
+  $escapedString = $dbc->escape_string($Rname);
+  $query = "DELETE FROM Review
+            WHERE Rname = '".$escapedString."';
+            ";
+  if(!@mysqli_multi_query($dbc, $query))
+  {
+    echo "<script>alert('Couldn't delete database entries\n".mysqli_error($dbc)."');</script>";
+  }
+  clearStoredResults();
+}
+
 function combineIngredients($ingredientSet, $newIngredient)
 {
   global $units;

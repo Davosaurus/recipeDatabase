@@ -33,6 +33,11 @@ require_once('mysqli_connect.php');
       Write Review
     </button>
   </form>
+  <form action="addrecipe.php" method="post">
+    <button class="menubutton" type="submit" name="Edit" value="<?= $_POST['Name'] ?>">
+      Edit Recipe
+    </button>
+  </form>
   <form action="getrecipeinfo.php" method="post" onsubmit="return confirm('Are you sure? This will permanently delete this recipe!');">
     <button class="menubutton" type="submit" name="Delete" value="<?= $_POST['Name'] ?>">
       Delete Recipe
@@ -78,7 +83,6 @@ if(isset($_POST['Review']))
 $query = "SELECT Rname, Iname, Amount, Unit
           FROM Ingredient
           WHERE Rname = \"".$dbc->escape_string($_POST['Name'])."\";";
-
 $ingredients = @mysqli_query($dbc, $query);
 
 if($ingredients)

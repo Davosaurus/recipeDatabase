@@ -9,6 +9,7 @@
 <div class="center">
 
 <?php
+include("global.php");
 
 if(isset($_POST['submit']))
 {
@@ -18,7 +19,8 @@ if(isset($_POST['submit']))
   $Instrument = str_replace("\"", "''", trim($_POST['Instrument']));
   $Prep_time = trim($_POST['Prep_time']);
   $Cook_time = trim($_POST['Cook_time']);
-  
+  if(isset($_POST['Score']))
+    $Score = trim($_POST['Score']);
   
   if(empty($_POST['Ingredient_1']))
     $data_missing[] = 'Ingredients';
@@ -67,7 +69,18 @@ if(isset($_POST['submit']))
   {
     require_once('mysqli_connect.php');
     
-    $query = "INSERT INTO Recipe (Name, Course, Instrument, Prep_time, Cook_time) VALUES (?, ?, ?, ?, ?)";
+    if(isset($_POST['Edit']))
+    {
+      deleteBaseRecipe($_POST['Edit']);
+      deleteRecipeSelection($_POST['Edit']);
+      
+      $query = "UPDATE Review
+                SET Rname = \"".$dbc->escape_string($Name)."\"
+                WHERE Rname = \"".$dbc->escape_string($_POST['Edit'])."\";";
+      @mysqli_query($dbc, $query);
+    }
+    
+    $query = "INSERT INTO Recipe (Name, Course, Instrument, Prep_time, Cook_time, Score) VALUES (?, ?, ?, ?, ?, ?)";
     
     $stmt = mysqli_prepare($dbc, $query);
     
@@ -76,7 +89,7 @@ if(isset($_POST['submit']))
     //b Blobs
     //s Everything Else
     
-    mysqli_stmt_bind_param($stmt, "sssii", $Name, $Course, $Instrument, $Prep_time, $Cook_time);
+    mysqli_stmt_bind_param($stmt, "sssiid", $Name, $Course, $Instrument, $Prep_time, $Cook_time, $Score);
     
     mysqli_stmt_execute($stmt);
     
@@ -145,7 +158,7 @@ if(isset($_POST['submit']))
   {
     echo '<b>You need to enter the following data:</b><br />';
     foreach($data_missing as $missing)
-      echo "$missing<br />";
+      echo $missing."<br />";
   }
 }
 

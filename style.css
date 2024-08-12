@@ -5,7 +5,12 @@
 html, input, select {
   background: #2E2E35;
   color: #DDDDDD;
+}
+html {
   font-family: verdana, helvetica, sans-serif;
+}
+select {
+  border: 2px inset #767676;
 }
 body {
   margin: 0;
@@ -50,7 +55,7 @@ input::-webkit-inner-spin-button {
   position: absolute;
   left: 15%;
   width: 85%;
-  padding: 0 20px;
+  padding: 0 20px 100px 20px;
   box-sizing: border-box;
 }
 .menubutton, .menusearch {

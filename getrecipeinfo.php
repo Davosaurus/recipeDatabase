@@ -17,25 +17,11 @@ global $allRname;
 // Get a connection for the database
 require_once('mysqli_connect.php');
 
-if(!empty($_POST['Delete']))
+if(isset($_POST['Delete']))
 {
-  $escapedString = $dbc->escape_string($_POST['Delete']);
-  $query = "DELETE FROM Recipe
-            WHERE Name = '".$escapedString."';
-            DELETE FROM Ingredient
-            WHERE Rname = '".$escapedString."';
-            DELETE FROM Instruction
-            WHERE Rname = '".$escapedString."';
-            DELETE FROM Selection
-            WHERE Rname = '".$escapedString."';
-            DELETE FROM Review
-            WHERE Rname = '".$escapedString."'
-            ";
-  if(!@mysqli_multi_query($dbc, $query))
-  {
-    echo "<script>alert('Couldn't delete database entries\n".mysqli_error($dbc)."');</script>";
-  }
-  clearStoredResults();
+  deleteBaseRecipe($_POST['Delete']);
+  deleteRecipeSelection($_POST['Delete']);
+  deleteRecipeReviews($_POST['Delete']);
 }
   
 // Create a query for the database
