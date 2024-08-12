@@ -52,6 +52,7 @@ function addNewInstruction(param) {
   newInstructionRow.id = "newInstructionRow_" + nextInstructionNum;
 
   addInstructionsTable.querySelector("tbody").appendChild(newInstructionRow);
+  autoGrow(newInstruction);
 }
 
 function removeIngredient() {
@@ -70,6 +71,11 @@ function removeInstruction() {
   if(rowToDelete != null) {
     rowToDelete.remove();
   }
+}
+
+function autoGrow(element) {
+  element.style.height = "5px";
+  element.style.height = (element.scrollHeight + 5) + "px";
 }
 </script>
 
@@ -274,7 +280,13 @@ if(isset($_POST['Edit']))
 <table id="addInstructions" style="padding: 8px 20px 8px 0; margin:0">
   <tr><td><b>Instructions:</b></td></tr>
   <tr id=initialInstructionRow>
-    <td><input class=instruction type="text" name="Instruction_1" maxlength="500" value="<?= $initialInstruction ?>" style=width:590 required> </td>
+    <td>
+      <textarea class=instruction type=text name=Instruction_1 maxlength=500 style=width:590 oninput="autoGrow(this)" required><?= $initialInstruction ?></textarea>
+        <script>
+          //Call autoGrow once for the first instruction to set the initial element height
+          autoGrow(document.querySelector("#initialInstructionRow .instruction"));
+        </script>
+    </td>
   </tr>
 </table>
 <div>
