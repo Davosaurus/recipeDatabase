@@ -4,6 +4,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="selectaction.js"></script>
+<script type="text/javascript" src="wakelock.js"></script>
 </head>
 
 <body>
@@ -107,6 +108,24 @@ if($info)
 ?>
 
 <h1 class="header"><?= $info['Name'] ?></h1>
+
+<table style="position:fixed; top:5px; right:0px;">
+  <tr>
+    <td>
+      Keep screen on
+    </td>
+    <td>
+      <button
+        class="inlinebutton iconbutton"
+        style="font-size:30"
+        onclick=toggleWakeLock.call(this)
+        wakeLockEnabled=true
+        enabledText="☑" disabledText="☐">
+        ☑
+      </button>
+    </td>
+  </tr>
+</table>
   
 <!-- Table that contains info (first row), ingredients table (second row), and instructions table (second row, second column) -->
 <table>
@@ -128,7 +147,6 @@ if($info)
             if($score['cost'] != NULL)
               echo '<b>Cost Efficiency Score: </b>'.round($score['cost'], 1).'<br>';
 ?>
-
           </td>
         </tr>
       </table>
