@@ -14,6 +14,10 @@ textarea {
   resize: none;
   overflow: hidden;
 }
+html.iframe {
+  overflow-y: scroll;
+  color-scheme: dark;
+}
 body {
   margin: 0;
   padding: 0;
@@ -44,20 +48,26 @@ input::-webkit-inner-spin-button {
   border: none;
   box-sizing: border-box;
 }
-.menubox.main {
+.main {
+  z-index:10;
   height: 100%;
 }
-.menubox.context {
+.context {
+  z-index:12;
   border-top: 5px solid #427042;
   top: 50%;
   bottom: 50px;
   padding-top: 30px;
 }
+.fullwidthcontent {
+  width:100%;
+  z-index:1;
+}
 .center {
   position: absolute;
   left: 15%;
   width: 85%;
-  padding: 0 20px 100px 20px;
+  padding: 0 0 100px 20px;
   box-sizing: border-box;
 }
 .menubutton, .menusearch {

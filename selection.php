@@ -53,7 +53,8 @@ require_once('mysqli_connect.php');
     Copy Grocery List to Clipboard
   </button>
 </div>
-<div class="center" style="padding-right:100px">
+
+<div class="center">
 
 <?php
 $query = "SELECT Rname, Amount
